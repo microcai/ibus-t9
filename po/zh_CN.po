@@ -1,0 +1,39 @@
+# Copyright (C) 2010 microcai <microcai@fedoraproject.org>
+# This file is distributed under the same license as the ibus-handwrite package.
+# FIRST AUTHOR <microcai@fedoraproject.org>, 2010.
+# microcai <microcai@fedoraproject.org>, 2010.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.01\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/ibus/issues/entry\n"
+"POT-Creation-Date: 2010-01-31 02:35+0800\n"
+"PO-Revision-Date: 2010-01-31 02:36+0800\n"
+"Last-Translator: microcai <microcai@fedoraproject.org>\n"
+"Language-Team: zh_CN <microcai@fedoraproject.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: UTF-8\n"
+
+#: src/main.c:90 src/main.c:94
+msgid "T9 input method"
+msgstr "T9 输入法"
+
+#: src/main.c:125
+#, c-format
+msgid "ibus-t9 Version %s Start Up\n"
+msgstr "ibus-T9 版本 %s 启动\n"
+
+#: src/engine.c:140
+#, c-format
+msgid "Err opening %s : %s\n"
+msgstr "打开 %s 时发生错误 %s \n"
+
+#~ msgid "ibus-T9"
+#~ msgstr "ibus-T9 输入法"
+
+#~ msgid "hand write recognizer"
+#~ msgstr "手写识别"
+
+#~ msgid "Please run aside with ibus\n"
+#~ msgstr "请在ibus中运行\n"
