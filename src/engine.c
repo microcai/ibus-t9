@@ -57,9 +57,6 @@ static void ibus_t9_engine_property_hide
 											(IBusEngine             *engine,
                                              const gchar            *prop_name);
 
-static void ibus_t9_engine_commit_string
-                                            (IBusT9Engine      *enchant,
-                                             const gchar            *string);
 static void ibus_t9_engine_update      (IBusT9Engine      *enchant);
 
 static IBusEngineClass *parent_class = NULL;
@@ -101,7 +98,7 @@ ibus_t9_engine_class_init (IBusT9EngineClass *klass)
 
 	ibus_object_class->destroy = (IBusObjectDestroyFunc) ibus_t9_engine_destroy;
 
-//    engine_class->process_key_event = ibus_t9_engine_process_key_event;
+    engine_class->process_key_event = ibus_t9_engine_process_key_event;
 
     engine_class->enable = ibus_t9_engine_enable;
 
@@ -171,205 +168,61 @@ ibus_t9_engine_destroy (IBusT9Engine *engine)
 	IBUS_OBJECT_CLASS (parent_class)->destroy ((IBusObject *)engine);
 }
 
-static void
-ibus_t9_engine_update_lookup_table (IBusT9Engine *enchant)
-{
-    gchar ** sugs;
-    gint n_sug, i;
-    gboolean retval;
-
-    if (enchant->preedit->len == 0) {
-        ibus_engine_hide_lookup_table ((IBusEngine *) enchant);
-        return;
-    }
-//
-//    ibus_lookup_table_clear (enchant->table);
-//
-//    if (sugs == NULL || n_sug == 0) {
-//        ibus_engine_hide_lookup_table ((IBusEngine *) enchant);
-//        return;
-//    }
-//
-//    for (i = 0; i < n_sug; i++) {
-//        ibus_lookup_table_append_candidate (enchant->table, ibus_text_new_from_string (sugs[i]));
-//    }
-//
-//    ibus_engine_update_lookup_table ((IBusEngine *) enchant, enchant->table, TRUE);
-
-}
-
-static void
-ibus_t9_engine_update_preedit (IBusT9Engine *enchant)
+static int
+ibus_t9_engine_commit_string (IBusT9Engine *enchant,guint index)
 {
     IBusText *text;
-    gint retval;
-
-    text = ibus_text_new_from_static_string (enchant->preedit->str);
-    text->attrs = ibus_attr_list_new ();
-
-    ibus_attr_list_append (text->attrs,
-                           ibus_attr_underline_new (IBUS_ATTR_UNDERLINE_SINGLE, 0, enchant->preedit->len));
-
-    if (enchant->preedit->len > 0) {
- //       retval = enchant_dict_check (dict, enchant->preedit->str, enchant->preedit->len);
-        if (retval != 0) {
-            ibus_attr_list_append (text->attrs,
-                               ibus_attr_foreground_new (0xff0000, 0, enchant->preedit->len));
-        }
-    }
-
-    ibus_engine_update_preedit_text ((IBusEngine *)enchant,
-                                     text,
-                                     enchant->cursor_pos,
-                                     TRUE);
-    g_object_unref (text);
-
-}
-
-/* commit preedit to client and update preedit */
-static gboolean
-ibus_t9_engine_commit_preedit (IBusT9Engine *enchant)
-{
-    if (enchant->preedit->len == 0)
-        return FALSE;
-
-    ibus_t9_engine_commit_string (enchant, enchant->preedit->str);
-    g_string_assign (enchant->preedit, "");
-    enchant->cursor_pos = 0;
-
-    ibus_t9_engine_update (enchant);
-
-    return TRUE;
-}
-
-
-static void
-ibus_t9_engine_commit_string (IBusT9Engine *enchant,
-                                   const gchar       *string)
-{
-    IBusText *text;
-    text = ibus_text_new_from_static_string (string);
+//    text = ibus_text_new_from_static_string (string);
     ibus_engine_commit_text ((IBusEngine *)enchant, text);
     g_object_unref (text);
+    return TRUE;
 }
 
 static void
 ibus_t9_engine_update (IBusT9Engine *enchant)
 {
-    ibus_t9_engine_update_preedit (enchant);
-    ibus_engine_hide_lookup_table ((IBusEngine *)enchant);
+//    ibus_t9_engine_update_preedit (enchant);
+//    ibus_engine_hide_lookup_table ((IBusEngine *)enchant);
 }
 
 #define is_alpha(c) (((c) >= IBUS_a && (c) <= IBUS_z) || ((c) >= IBUS_A && (c) <= IBUS_Z))
 
 static gboolean
-ibus_t9_engine_process_key_event (IBusEngine *engine,
+ibus_t9_engine_process_key_event (IBusEngine *ibusengine,
                                        guint       keyval,
                                        guint       keycode,
                                        guint       modifiers)
 {
     IBusText *text;
-    IBusT9Engine *enchant = (IBusT9Engine *)engine;
+    IBusT9Engine *engine = (IBusT9Engine *) ibusengine;
 
     if (modifiers & IBUS_RELEASE_MASK)
         return FALSE;
 
     modifiers &= (IBUS_CONTROL_MASK | IBUS_MOD1_MASK);
 
-    if (modifiers == IBUS_CONTROL_MASK && keyval == IBUS_s) {
-        ibus_t9_engine_update_lookup_table (enchant);
-        return TRUE;
-    }
-
-    if (modifiers != 0) {
-        if (enchant->preedit->len == 0)
-            return FALSE;
-        else
-            return TRUE;
-    }
-
-
     switch (keyval) {
     case IBUS_space:
-        g_string_append (enchant->preedit, " ");
-        return ibus_t9_engine_commit_preedit (enchant);
+        return ibus_t9_engine_commit_string(engine,0);
     case IBUS_Return:
-        return ibus_t9_engine_commit_preedit (enchant);
+        return ibus_t9_engine_commit_string(engine,0);
 
     case IBUS_Escape:
-        if (enchant->preedit->len == 0)
-            return FALSE;
-
-        g_string_assign (enchant->preedit, "");
-        enchant->cursor_pos = 0;
-        ibus_t9_engine_update (enchant);
-        return TRUE;
+         return TRUE;
 
     case IBUS_Left:
-        if (enchant->preedit->len == 0)
-            return FALSE;
-        if (enchant->cursor_pos > 0) {
-            enchant->cursor_pos --;
-            ibus_t9_engine_update (enchant);
-        }
-        return TRUE;
+         return TRUE;
 
-    case IBUS_Right:
-        if (enchant->preedit->len == 0)
-            return FALSE;
-        if (enchant->cursor_pos < enchant->preedit->len) {
-            enchant->cursor_pos ++;
-            ibus_t9_engine_update (enchant);
-        }
-        return TRUE;
 
     case IBUS_Up:
-        if (enchant->preedit->len == 0)
-            return FALSE;
-        if (enchant->cursor_pos != 0) {
-            enchant->cursor_pos = 0;
-            ibus_t9_engine_update (enchant);
-        }
+
         return TRUE;
 
     case IBUS_Down:
-        if (enchant->preedit->len == 0)
-            return FALSE;
-
-        if (enchant->cursor_pos != enchant->preedit->len) {
-            enchant->cursor_pos = enchant->preedit->len;
-            ibus_t9_engine_update (enchant);
-        }
 
         return TRUE;
 
     case IBUS_BackSpace:
-        if (enchant->preedit->len == 0)
-            return FALSE;
-        if (enchant->cursor_pos > 0) {
-            enchant->cursor_pos --;
-            g_string_erase (enchant->preedit, enchant->cursor_pos, 1);
-            ibus_t9_engine_update (enchant);
-        }
-        return TRUE;
-
-    case IBUS_Delete:
-        if (enchant->preedit->len == 0)
-            return FALSE;
-        if (enchant->cursor_pos < enchant->preedit->len) {
-            g_string_erase (enchant->preedit, enchant->cursor_pos, 1);
-            ibus_t9_engine_update (enchant);
-        }
-        return TRUE;
-    }
-
-    if (is_alpha (keyval)) {
-        g_string_insert_c (enchant->preedit,
-                           enchant->cursor_pos,
-                           keyval);
-
-        enchant->cursor_pos ++;
-        ibus_t9_engine_update (enchant);
 
         return TRUE;
     }
