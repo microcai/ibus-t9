@@ -33,8 +33,6 @@ static gboolean
 static void ibus_t9_engine_focus_in    (IBusEngine             *engine);
 static void ibus_t9_engine_focus_out   (IBusEngine             *engine);
 static void ibus_t9_engine_reset       (IBusEngine             *engine);
-static void ibus_t9_engine_enable      (IBusEngine             *engine);
-static void ibus_t9_engine_disable     (IBusEngine             *engine);
 static void ibus_engine_set_cursor_location (IBusEngine             *engine,
                                              gint                    x,
                                              gint                    y,
@@ -100,9 +98,9 @@ ibus_t9_engine_class_init (IBusT9EngineClass *klass)
 
     engine_class->process_key_event = ibus_t9_engine_process_key_event;
 
-    engine_class->enable = ibus_t9_engine_enable;
+    engine_class->enable = ibus_t9_engine_focus_in;
 
-    engine_class->disable = ibus_t9_engine_disable;
+    engine_class->disable = ibus_t9_engine_focus_out;
 
     engine_class->focus_in = ibus_t9_engine_focus_in;
 
@@ -115,57 +113,74 @@ ibus_t9_engine_class_init (IBusT9EngineClass *klass)
 
 
 static void
-ibus_t9_engine_init (IBusT9Engine *engine)
+ibus_t9_engine_init(IBusT9Engine *engine)
 {
-	size_t i;
-	IBusT9EngineClass*	klass;
+  size_t i;
+  IBusT9EngineClass* klass;
 
-	char icon_file[4096];
+  char icon_file[4096];
 
-	GError * err;
+  GError * err;
 
-	engine->laststate.x = 300 ;
-	engine->laststate.y = 300 ;
-	engine->laststate.width = 200 ;
-	engine->laststate.height = 120 ;
-	engine->drag = 0;
+  engine->laststate.x = 300;
+  engine->laststate.y = 300;
+  engine->laststate.width = 200;
+  engine->laststate.height = 120;
+  engine->drag = 0;
 
-	klass = IBUS_T9_ENGINE_GET_CLASS(engine);
+  klass = IBUS_T9_ENGINE_GET_CLASS(engine);
 
-	for (i = 0; i < 5; ++i) {
-		err = NULL;
-		sprintf(icon_file,"%s/key%u.svg",klass->icondir->str,i+1);
-		g_message("load %s \n",icon_file);
-		engine->keysicon[i] = rsvg_handle_new_from_file(icon_file,&err);
-		if (engine->keysicon[i] == NULL)
-			g_error(_("Err opening %s : %s\n"), icon_file, err ? err->message : "");
-	}
+  for (i = 0; i < 5; ++i)
+    {
+      err = NULL;
+      sprintf(icon_file, "%s/key%u.svg", klass->icondir->str, i + 1);
+      g_message("load %s \n", icon_file);
+      engine->keysicon[i] = rsvg_handle_new_from_file(icon_file, &err);
+      if (engine->keysicon[i] == NULL)
+        g_error(_("Err opening %s : %s\n"), icon_file, err ? err->message : "");
+    }
 
-//	puts("?????!!!!\n");
-//	engine->preedit = g_string_new ("");
-//	engine->cursor_pos = 0;
+  engine->LookupTable = gtk_window_new(GTK_WINDOW_POPUP);
 
-//	ibus_lookup_table_new (9, 0, TRUE, TRUE);
-//    ibus_engine_show_lookup_table(IBUS_ENGINE(engine));
+  gtk_window_move(GTK_WINDOW(engine->LookupTable), engine->laststate.x,
+      engine->laststate.y);
+  gtk_window_resize(GTK_WINDOW(engine->LookupTable), engine->laststate.width,
+      engine->laststate.height);
+
+  gtk_widget_add_events(GTK_WIDGET(engine->LookupTable),
+      GDK_BUTTON_MOTION_MASK | GDK_BUTTON_RELEASE_MASK | GDK_BUTTON_PRESS_MASK
+          | GDK_EXPOSURE_MASK);
+  g_signal_connect_after(G_OBJECT(engine->LookupTable),"motion_notify_event",G_CALLBACK(on_mouse_move),engine);
+  g_signal_connect(G_OBJECT(engine->LookupTable),"expose-event",G_CALLBACK(on_paint),engine);
+  g_signal_connect(G_OBJECT(engine->LookupTable),"button-release-event",G_CALLBACK(on_button),engine);
+  g_signal_connect(G_OBJECT(engine->LookupTable),"button-press-event",G_CALLBACK(on_button),engine);
+
+  //	puts("?????!!!!\n");
+  //	engine->preedit = g_string_new ("");
+  //	engine->cursor_pos = 0;
+
+  //	ibus_lookup_table_new (9, 0, TRUE, TRUE);
+  //    ibus_engine_show_lookup_table(IBUS_ENGINE(engine));
 }
 
 static void
-ibus_t9_engine_destroy (IBusT9Engine *engine)
+ibus_t9_engine_destroy(IBusT9Engine *engine)
 {
-//    if (enchant->preedit) {
-//        g_string_free (enchant->preedit, TRUE);
-//        enchant->preedit = NULL;
-//    }
+  //    if (enchant->preedit) {
+  //        g_string_free (enchant->preedit, TRUE);
+  //        enchant->preedit = NULL;
+  //    }
 
-//    if (enchant->table) {
-//        g_object_unref (enchant->table);
-//        enchant->table = NULL;
-//    }
+  //    if (enchant->table) {
+  //        g_object_unref (enchant->table);
+  //        enchant->table = NULL;
+  //    }
 
-	ibus_t9_engine_disable(IBUS_ENGINE(engine));
+  g_print("%s , %d %d\n", __func__, engine->laststate.x, engine->laststate.y);
+  gtk_widget_destroy(engine->LookupTable);
+  engine->LookupTable = NULL;
 
-
-	IBUS_OBJECT_CLASS (parent_class)->destroy ((IBusObject *)engine);
+  IBUS_OBJECT_CLASS (parent_class)->destroy((IBusObject *) engine);
 }
 
 static int
@@ -228,34 +243,6 @@ ibus_t9_engine_process_key_event (IBusEngine *ibusengine,
     }
 
     return FALSE;
-}
-
-static void ibus_t9_engine_enable      (IBusEngine             *engine)
-{
-	IBusT9Engine	* ibus_t9 = IBUS_T9_ENGINE(engine);
-
-	if(!ibus_t9->LookupTable)
-		ibus_t9->LookupTable = gtk_window_new(GTK_WINDOW_POPUP);
-
-	gtk_window_move(GTK_WINDOW(ibus_t9->LookupTable),ibus_t9->laststate.x,ibus_t9->laststate.y);
-	gtk_window_resize(GTK_WINDOW(ibus_t9->LookupTable),ibus_t9->laststate.width,ibus_t9->laststate.height);
-
-	gtk_widget_add_events(GTK_WIDGET(ibus_t9->LookupTable),
-			GDK_BUTTON_MOTION_MASK | GDK_BUTTON_RELEASE_MASK| GDK_BUTTON_PRESS_MASK | GDK_EXPOSURE_MASK);
-	g_signal_connect_after(G_OBJECT(ibus_t9->LookupTable),"motion_notify_event",G_CALLBACK(on_mouse_move),engine);
-	g_signal_connect(G_OBJECT(ibus_t9->LookupTable),"expose-event",G_CALLBACK(on_paint),engine);
-	g_signal_connect(G_OBJECT(ibus_t9->LookupTable),"button-release-event",G_CALLBACK(on_button),engine);
-	g_signal_connect(G_OBJECT(ibus_t9->LookupTable),"button-press-event",G_CALLBACK(on_button),engine);
-
-}
-
-static void ibus_t9_engine_disable     (IBusEngine             *engine)
-{
-	IBusT9Engine	* ibus_t9 = IBUS_T9_ENGINE(engine);
-//	gtk_window_get_position(GTK_WINDOW(ibus_t9->LookupTable),&ibus_t9->laststate.x,&ibus_t9->laststate.y);
-	g_print("%s , %d %d\n",__func__,ibus_t9->laststate.x,ibus_t9->laststate.y);
-	gtk_widget_destroy(ibus_t9->LookupTable);
-	ibus_t9->LookupTable = NULL;
 }
 
 static void ibus_t9_engine_focus_in    (IBusEngine             *engine)
