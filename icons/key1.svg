@@ -138,6 +138,70 @@
        y1="26.686861"
        x2="-7.5595942"
        y2="32.304497" />
+    <filter
+       id="filter2844"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur2846"
+         in="SourceAlpha"
+         stdDeviation="2.100000"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix2848"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.521000 0 " />
+      <feOffset
+         id="feOffset2850"
+         in="bluralpha"
+         dx="1.000000"
+         dy="1.000000"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge2852"
+         result="fbSourceGraphic">
+        <feMergeNode
+           id="feMergeNode2854"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode2856"
+           in="SourceGraphic" />
+      </feMerge>
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2858" />
+      <feGaussianBlur
+         id="feGaussianBlur2860"
+         in="fbSourceGraphicAlpha"
+         stdDeviation="2.100000"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix2862"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.521000 0 " />
+      <feOffset
+         id="feOffset2864"
+         in="bluralpha"
+         dx="1.000000"
+         dy="1.000000"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge2866">
+        <feMergeNode
+           id="feMergeNode2868"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode2870"
+           in="fbSourceGraphic" />
+      </feMerge>
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -147,9 +211,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7"
-     inkscape:cx="4.2857143"
-     inkscape:cy="19.622993"
-     inkscape:current-layer="g2996"
+     inkscape:cx="33.969932"
+     inkscape:cy="19.337279"
+     inkscape:current-layer="layer2"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
@@ -176,11 +240,10 @@
      id="layer1"
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     style="display:inline"
-     sodipodi:insensitive="true">
+     style="display:inline">
     <g
        id="g2918"
-       style="filter:url(#filter2982)">
+       style="filter:url(#filter2844)">
       <text
          transform="scale(0.98637461,1.0138136)"
          id="text2816"
@@ -211,11 +274,10 @@
      style="display:inline"
      inkscape:groupmode="layer"
      inkscape:label="Layer 2"
-     id="g2996">
+     id="layer2">
     <g
-       style="filter:url(#filter2982)"
        id="g2998"
-       transform="translate(-0.28571426,-1)">
+       transform="translate(0.14285717,0.14285714)">
       <text
          xml:space="preserve"
          style="font-size:55.66330719px;font-style:normal;font-weight:normal;fill:#0000ff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"

@@ -62,7 +62,7 @@ on_paint(GtkWidget *widget, GdkEventExpose *event, gpointer user_data)
           GSIZE_TO_POINTER(37), 0);
 
       pixbuf = rsvg_handle_get_pixbuf_sub(engine->keysicon[i],
-          engine->iconstate[i] ? "#layer1" : "#layer2");
+          engine->iconstate[i] ? "#layer2" : "#layer1");
 
 //      gdk_draw_rectangle(gw,gc,1,i * 40 + 1, YFORSVG, 37, 37);
 

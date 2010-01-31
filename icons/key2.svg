@@ -303,6 +303,109 @@
        y1="-26.422714"
        x2="3.3921571"
        y2="-24.252073" />
+    <filter
+       id="filter2882"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur2884"
+         in="SourceAlpha"
+         stdDeviation="2.100000"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix2886"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.521000 0 " />
+      <feOffset
+         id="feOffset2888"
+         in="bluralpha"
+         dx="1.000000"
+         dy="1.000000"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge2890"
+         result="fbSourceGraphic">
+        <feMergeNode
+           id="feMergeNode2892"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode2894"
+           in="SourceGraphic" />
+      </feMerge>
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2896" />
+      <feGaussianBlur
+         id="feGaussianBlur2898"
+         in="fbSourceGraphicAlpha"
+         stdDeviation="2.100000"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix2900"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.521000 0 " />
+      <feOffset
+         id="feOffset2902"
+         in="bluralpha"
+         dx="1.000000"
+         dy="1.000000"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge2904">
+        <feMergeNode
+           id="feMergeNode2906"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode2908"
+           in="fbSourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter2910"
+       inkscape:label="Inner Shadow"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Adds a colorizable drop shadow inside"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur2912"
+         stdDeviation="4"
+         result="result8" />
+      <feOffset
+         id="feOffset2914"
+         dx="4"
+         dy="4"
+         result="result11" />
+      <feComposite
+         id="feComposite2916"
+         in2="result11"
+         result="result6"
+         in="SourceGraphic"
+         operator="in" />
+      <feFlood
+         id="feFlood2918"
+         result="result10"
+         in="result6"
+         flood-opacity="1"
+         flood-color="rgb(0,0,0)" />
+      <feBlend
+         id="feBlend2920"
+         in2="result10"
+         mode="normal"
+         in="result6"
+         result="result12" />
+      <feComposite
+         id="feComposite2922"
+         in2="SourceGraphic"
+         result="result2"
+         operator="in" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -311,10 +414,10 @@
      borderopacity="1"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="7"
-     inkscape:cx="4.2857143"
-     inkscape:cy="19.337279"
-     inkscape:current-layer="g3207"
+     inkscape:zoom="9.8994949"
+     inkscape:cx="6.0140258"
+     inkscape:cy="21.658267"
+     inkscape:current-layer="layer2"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
@@ -342,7 +445,7 @@
      style="display:inline">
     <g
        id="g3159"
-       style="filter:url(#filter3165)">
+       style="filter:url(#filter2882)">
       <text
          transform="matrix(-0.06004513,0.98454531,-1.0119334,-0.06171547,0,0)"
          id="text2816"
@@ -372,15 +475,13 @@
   <g
      inkscape:groupmode="layer"
      inkscape:label="Layer 2"
-     id="g3207"
+     id="layer2"
      style="display:inline">
     <g
-       style="filter:url(#filter3165)"
-       id="g3209"
-       transform="translate(-0.28571428,-1.7142857)">
+       id="g3209">
       <text
          xml:space="preserve"
-         style="font-size:55.66330719px;font-style:normal;font-weight:normal;fill:#0000ff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         style="font-size:55.66330718999999760px;font-style:normal;font-weight:normal;fill:#0000ff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;"
          x="-6.3701038"
          y="-3.1452699"
          id="text3211"
@@ -389,15 +490,15 @@
            id="tspan3213"
            x="-6.3701038"
            y="-3.1452699"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#0000ff;fill-opacity:1;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold">一</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#0000ff;fill-opacity:1;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold;">一</tspan></text>
       <text
          id="text3215"
          y="-3.8923416"
          x="-5.9089236"
-         style="font-size:54.47754669px;font-style:normal;font-weight:normal;fill:url(#linearGradient3219);fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         style="font-size:54.47754668999999694px;font-style:normal;font-weight:normal;fill:url(#linearGradient3219);fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;"
          xml:space="preserve"
          transform="matrix(-0.060713,0.99549611,-1.0008018,-0.06103658,0,0)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:url(#linearGradient3219);fill-opacity:1;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:url(#linearGradient3219);fill-opacity:1;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold;"
            y="-3.8923416"
            x="-5.9089236"
            id="tspan3217"
