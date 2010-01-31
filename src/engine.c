@@ -127,10 +127,10 @@ ibus_t9_engine_init (IBusT9Engine *engine)
 
 	GError * err;
 
-	engine->laststate.x = 200 ;
-	engine->laststate.y = 200 ;
+	engine->laststate.x = 300 ;
+	engine->laststate.y = 300 ;
 	engine->laststate.width = 200 ;
-	engine->laststate.height = 200 ;
+	engine->laststate.height = 120 ;
 	engine->drag = 0;
 
 	klass = IBUS_T9_ENGINE_GET_CLASS(engine);
@@ -385,6 +385,7 @@ static void ibus_t9_engine_enable      (IBusEngine             *engine)
 		ibus_t9->LookupTable = gtk_window_new(GTK_WINDOW_POPUP);
 
 	gtk_window_move(GTK_WINDOW(ibus_t9->LookupTable),ibus_t9->laststate.x,ibus_t9->laststate.y);
+	gtk_window_resize(GTK_WINDOW(ibus_t9->LookupTable),ibus_t9->laststate.width,ibus_t9->laststate.height);
 
 	gtk_widget_add_events(GTK_WIDGET(ibus_t9->LookupTable),
 			GDK_BUTTON_MOTION_MASK | GDK_BUTTON_RELEASE_MASK| GDK_BUTTON_PRESS_MASK | GDK_EXPOSURE_MASK);

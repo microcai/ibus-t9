@@ -18,6 +18,18 @@
    sodipodi:docname="key2.svg">
   <defs
      id="defs2871">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3099">
+      <stop
+         style="stop-color:#00ffff;stop-opacity:1;"
+         offset="0"
+         id="stop3101" />
+      <stop
+         style="stop-color:#00ffff;stop-opacity:0;"
+         offset="1"
+         id="stop3103" />
+    </linearGradient>
     <inkscape:perspective
        sodipodi:type="inkscape:persp3d"
        inkscape:vp_x="0 : 24 : 1"
@@ -54,6 +66,243 @@
        y2="32.304497"
        gradientUnits="userSpaceOnUse"
        gradientTransform="translate(14.486088,17.618946)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3099"
+       id="linearGradient3105"
+       x1="35.547348"
+       y1="-26.422714"
+       x2="3.3921571"
+       y2="-24.252073"
+       gradientUnits="userSpaceOnUse" />
+    <filter
+       id="filter3165"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur3167"
+         in="SourceAlpha"
+         stdDeviation="2.000000"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix3169"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.499000 0 " />
+      <feOffset
+         id="feOffset3171"
+         in="bluralpha"
+         dx="1.000000"
+         dy="1.000000"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge3173"
+         result="fbSourceGraphic">
+        <feMergeNode
+           id="feMergeNode3175"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode3177"
+           in="SourceGraphic" />
+      </feMerge>
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix3179" />
+      <feGaussianBlur
+         id="feGaussianBlur3181"
+         in="fbSourceGraphicAlpha"
+         stdDeviation="2.000000"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix3183"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.502000 0 " />
+      <feOffset
+         id="feOffset3185"
+         in="bluralpha"
+         dx="1.000000"
+         dy="1.000000"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge3187"
+         result="fbSourceGraphic">
+        <feMergeNode
+           id="feMergeNode3189"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode3191"
+           in="fbSourceGraphic" />
+      </feMerge>
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix3193" />
+      <feGaussianBlur
+         id="feGaussianBlur3195"
+         in="fbSourceGraphicAlpha"
+         stdDeviation="2.000000"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix3197"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.499000 0 " />
+      <feOffset
+         id="feOffset3199"
+         in="bluralpha"
+         dx="1.000000"
+         dy="1.000000"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge3201"
+         result="fbSourceGraphic">
+        <feMergeNode
+           id="feMergeNode3203"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode3205"
+           in="fbSourceGraphic" />
+      </feMerge>
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix3221" />
+      <feGaussianBlur
+         id="feGaussianBlur3223"
+         in="fbSourceGraphicAlpha"
+         stdDeviation="0.000000"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix3225"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.000000 0 " />
+      <feOffset
+         id="feOffset3227"
+         in="bluralpha"
+         dx="0.000000"
+         dy="0.000000"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge3229"
+         result="fbSourceGraphic">
+        <feMergeNode
+           id="feMergeNode3231"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode3233"
+           in="fbSourceGraphic" />
+      </feMerge>
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix3235" />
+      <feGaussianBlur
+         id="feGaussianBlur3237"
+         in="fbSourceGraphicAlpha"
+         stdDeviation="0.000000"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix3239"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1.000000 0 " />
+      <feOffset
+         id="feOffset3241"
+         in="bluralpha"
+         dx="0.000000"
+         dy="0.000000"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge3243"
+         result="fbSourceGraphic">
+        <feMergeNode
+           id="feMergeNode3245"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode3247"
+           in="fbSourceGraphic" />
+      </feMerge>
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix3249" />
+      <feGaussianBlur
+         id="feGaussianBlur3251"
+         in="fbSourceGraphicAlpha"
+         stdDeviation="0.000000"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix3253"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1.000000 0 " />
+      <feOffset
+         id="feOffset3255"
+         in="bluralpha"
+         dx="0.000000"
+         dy="0.000000"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge3257"
+         result="fbSourceGraphic">
+        <feMergeNode
+           id="feMergeNode3259"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode3261"
+           in="fbSourceGraphic" />
+      </feMerge>
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix3263" />
+      <feGaussianBlur
+         id="feGaussianBlur3265"
+         in="fbSourceGraphicAlpha"
+         stdDeviation="0.000000"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix3267"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.000000 0 " />
+      <feOffset
+         id="feOffset3269"
+         in="bluralpha"
+         dx="0.000000"
+         dy="0.000000"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge3271">
+        <feMergeNode
+           id="feMergeNode3273"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode3275"
+           in="fbSourceGraphic" />
+      </feMerge>
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3099"
+       id="linearGradient3219"
+       gradientUnits="userSpaceOnUse"
+       x1="35.547348"
+       y1="-26.422714"
+       x2="3.3921571"
+       y2="-24.252073" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -63,9 +312,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7"
-     inkscape:cx="24"
+     inkscape:cx="4.2857143"
      inkscape:cy="19.337279"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g3207"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
@@ -89,30 +338,70 @@
   <g
      id="layer1"
      inkscape:label="Layer 1"
-     inkscape:groupmode="layer">
-    <text
-       xml:space="preserve"
-       style="font-size:55.66330719px;font-style:normal;font-weight:normal;fill:#0000ff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="-6.3701038"
-       y="-3.1452699"
-       id="text2816"
-       transform="matrix(-0.06004513,0.98454531,-1.0119334,-0.06171547,0,0)"><tspan
-         sodipodi:role="line"
-         id="tspan2818"
+     inkscape:groupmode="layer"
+     style="display:inline">
+    <g
+       id="g3159"
+       style="filter:url(#filter3165)">
+      <text
+         transform="matrix(-0.06004513,0.98454531,-1.0119334,-0.06171547,0,0)"
+         id="text2816"
+         y="-3.1452699"
+         x="-6.3701038"
+         style="font-size:55.66330719px;font-style:normal;font-weight:normal;fill:#0000ff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#0000ff;fill-opacity:1;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold"
+           y="-3.1452699"
+           x="-6.3701038"
+           id="tspan2818"
+           sodipodi:role="line">一</tspan></text>
+      <text
+         transform="matrix(-0.060713,0.99549611,-1.0008018,-0.06103658,0,0)"
+         xml:space="preserve"
+         style="font-size:54.47754669px;font-style:normal;font-weight:normal;fill:url(#linearGradient3105);fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         x="-5.9089236"
+         y="-3.8923416"
+         id="text2845"><tspan
+           sodipodi:role="line"
+           id="tspan2847"
+           x="-5.9089236"
+           y="-3.8923416"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:url(#linearGradient3105);fill-opacity:1;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold">一</tspan></text>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 2"
+     id="g3207"
+     style="display:inline">
+    <g
+       style="filter:url(#filter3165)"
+       id="g3209"
+       transform="translate(-0.28571428,-1.7142857)">
+      <text
+         xml:space="preserve"
+         style="font-size:55.66330719px;font-style:normal;font-weight:normal;fill:#0000ff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
          x="-6.3701038"
          y="-3.1452699"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#0000ff;fill-opacity:1;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold">一</tspan></text>
-    <text
-       id="text2845"
-       y="-3.8923416"
-       x="-5.9089236"
-       style="font-size:54.47754668999999694px;font-style:normal;font-weight:normal;fill:#ffd5d5;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       xml:space="preserve"
-       transform="matrix(-0.060713,0.99549611,-1.0008018,-0.06103658,0,0)"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffd5d5;fill-opacity:1;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold"
+         id="text3211"
+         transform="matrix(-0.06004513,0.98454531,-1.0119334,-0.06171547,0,0)"><tspan
+           sodipodi:role="line"
+           id="tspan3213"
+           x="-6.3701038"
+           y="-3.1452699"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#0000ff;fill-opacity:1;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold">一</tspan></text>
+      <text
+         id="text3215"
          y="-3.8923416"
          x="-5.9089236"
-         id="tspan2847"
-         sodipodi:role="line">一</tspan></text>
+         style="font-size:54.47754669px;font-style:normal;font-weight:normal;fill:url(#linearGradient3219);fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"
+         transform="matrix(-0.060713,0.99549611,-1.0008018,-0.06103658,0,0)"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:url(#linearGradient3219);fill-opacity:1;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold"
+           y="-3.8923416"
+           x="-5.9089236"
+           id="tspan3217"
+           sodipodi:role="line">一</tspan></text>
+    </g>
   </g>
 </svg>

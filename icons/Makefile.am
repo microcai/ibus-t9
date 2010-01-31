@@ -24,6 +24,7 @@ icons_DATA = \
 	half-letter.svg \
 	full-punct.svg \
 	half-punct.svg \
+    key1.svg     key2.svg     key3.svg     key4.svg     key5.svg \
 	$(NULL)
 
 iconsdir = $(pkgdatadir)/icons

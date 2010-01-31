@@ -15,7 +15,7 @@
    id="svg2869"
    version="1.1"
    inkscape:version="0.47pre4 r22446"
-   sodipodi:docname="h.svg">
+   sodipodi:docname="key1.svg">
   <defs
      id="defs2871">
     <inkscape:perspective
@@ -64,6 +64,80 @@
        y2="32.304497"
        gradientUnits="userSpaceOnUse"
        gradientTransform="translate(14.486088,17.618946)" />
+    <filter
+       id="filter2982"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur2984"
+         in="SourceAlpha"
+         stdDeviation="2.000000"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix2986"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.500000 0 " />
+      <feOffset
+         id="feOffset2988"
+         in="bluralpha"
+         dx="2.000000"
+         dy="1.000000"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge2990"
+         result="fbSourceGraphic">
+        <feMergeNode
+           id="feMergeNode2992"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode2994"
+           in="SourceGraphic" />
+      </feMerge>
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix3008" />
+      <feGaussianBlur
+         id="feGaussianBlur3010"
+         in="fbSourceGraphicAlpha"
+         stdDeviation="2.000000"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix3012"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.500000 0 " />
+      <feOffset
+         id="feOffset3014"
+         in="bluralpha"
+         dx="0.000000"
+         dy="0.000000"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge3016">
+        <feMergeNode
+           id="feMergeNode3018"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode3020"
+           in="fbSourceGraphic" />
+      </feMerge>
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2849"
+       id="linearGradient3022"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.38655074,0,0,0.38655074,-1.0852854,13.050554)"
+       x1="106.39782"
+       y1="26.686861"
+       x2="-7.5595942"
+       y2="32.304497" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -73,9 +147,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7"
-     inkscape:cx="24"
-     inkscape:cy="19.908707"
-     inkscape:current-layer="layer1"
+     inkscape:cx="4.2857143"
+     inkscape:cy="19.622993"
+     inkscape:current-layer="g2996"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
@@ -83,7 +157,9 @@
      inkscape:window-height="850"
      inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     inkscape:snap-bbox="true"
+     inkscape:snap-global="true" />
   <metadata
      id="metadata2874">
     <rdf:RDF>
@@ -92,37 +168,78 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
      id="layer1"
      inkscape:label="Layer 1"
-     inkscape:groupmode="layer">
-    <text
-       xml:space="preserve"
-       style="font-size:55.66330719px;font-style:normal;font-weight:normal;fill:#0000ff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="-4.1887331"
-       y="45.070259"
-       id="text2816"
-       transform="scale(0.98637461,1.0138136)"><tspan
-         sodipodi:role="line"
-         id="tspan2818"
+     inkscape:groupmode="layer"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <g
+       id="g2918"
+       style="filter:url(#filter2982)">
+      <text
+         transform="scale(0.98637461,1.0138136)"
+         id="text2816"
+         y="45.070259"
+         x="-4.1887331"
+         style="font-size:55.66330719px;font-style:normal;font-weight:normal;fill:#0000ff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#0000ff;fill-opacity:1;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold"
+           y="45.070259"
+           x="-4.1887331"
+           id="tspan2818"
+           sodipodi:role="line">一</tspan></text>
+      <text
+         transform="scale(0.99734576,1.0026613)"
+         xml:space="preserve"
+         style="font-size:54.47754669px;font-style:normal;font-weight:normal;fill:url(#linearGradient2855);fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         x="-3.7515485"
+         y="44.859474"
+         id="text2845"><tspan
+           sodipodi:role="line"
+           id="tspan2847"
+           x="-3.7515485"
+           y="44.859474"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:url(#linearGradient2855);fill-opacity:1;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold">一</tspan></text>
+    </g>
+  </g>
+  <g
+     style="display:inline"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 2"
+     id="g2996">
+    <g
+       style="filter:url(#filter2982)"
+       id="g2998"
+       transform="translate(-0.28571426,-1)">
+      <text
+         xml:space="preserve"
+         style="font-size:55.66330719px;font-style:normal;font-weight:normal;fill:#0000ff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
          x="-4.1887331"
          y="45.070259"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#0000ff;fill-opacity:1;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold">一</tspan></text>
-    <text
-       id="text2845"
-       y="44.859474"
-       x="-3.7515485"
-       style="font-size:54.47754669px;font-style:normal;font-weight:normal;fill:url(#linearGradient2855);fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       xml:space="preserve"
-       transform="scale(0.99734576,1.0026613)"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:url(#linearGradient2855);fill-opacity:1;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold"
+         id="text3000"
+         transform="scale(0.98637461,1.0138136)"><tspan
+           sodipodi:role="line"
+           id="tspan3002"
+           x="-4.1887331"
+           y="45.070259"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#0000ff;fill-opacity:1;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold">一</tspan></text>
+      <text
+         id="text3004"
          y="44.859474"
          x="-3.7515485"
-         id="tspan2847"
-         sodipodi:role="line">一</tspan></text>
+         style="font-size:54.47754669px;font-style:normal;font-weight:normal;fill:url(#linearGradient3022);fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"
+         transform="scale(0.99734576,1.0026613)"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:url(#linearGradient3022);fill-opacity:1;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold"
+           y="44.859474"
+           x="-3.7515485"
+           id="tspan3006"
+           sodipodi:role="line">一</tspan></text>
+    </g>
   </g>
 </svg>

@@ -27,88 +27,175 @@
 #include <librsvg/rsvg-cairo.h>
 #include "lookuptable.h"
 
-static void svg_set_size(gint *width, gint *height, gpointer user_data)
+#define YFORSVG  80
+
+static void
+svg_set_size(gint *width, gint *height, gpointer user_data)
 {
-	g_print("w = %d h = %d\n", *width, *height);
-	*width = *height = GPOINTER_TO_SIZE(user_data);
+//  g_print("w = %d h = %d\n", *width, *height);
+  *width = *height = GPOINTER_TO_SIZE(user_data);
 }
 
-gboolean on_paint(GtkWidget *widget, GdkEventExpose *event,
-		gpointer user_data)
+gboolean
+on_paint(GtkWidget *widget, GdkEventExpose *event, gpointer user_data)
 {
-	int const YFORSVG =  50;
-	GdkGC	* gc;
-	GdkPixbuf * pixbuf;
-	IBusT9Engine * engine;
 
-	engine = (IBusT9Engine *) (user_data);
+  GdkGC * gc;
+  GdkPixbuf * pixbuf;
+  IBusT9Engine * engine;
+  GdkWindow* gw;
 
-	int size = 37;
+  engine = (IBusT9Engine *) (user_data);
 
-	gc = gdk_gc_new(widget->window);
+  int size = 37;
 
-	int i;
+  gw = widget->window;
 
-	for(i=0;i<5;i++) //画笔画
-	{
-		rsvg_handle_set_size_callback(engine->keysicon[i],svg_set_size,GSIZE_TO_POINTER(37),0);
+  gc = gdk_gc_new(gw);
 
-		pixbuf = rsvg_handle_get_pixbuf(engine->keysicon[i]);
+  int i;
 
-		gdk_draw_pixbuf(widget->window,gc,pixbuf,0,0,i*40 + 1,  YFORSVG,37,37,GDK_RGB_DITHER_NONE,0,0);
+  for (i = 0; i < 5; i++) //画笔画
+    {
+      //按下状态还是不一样的
+      rsvg_handle_set_size_callback(engine->keysicon[i], svg_set_size,
+          GSIZE_TO_POINTER(37), 0);
 
-		g_object_unref(pixbuf);
-	}
-	//画已经输入的笔画
+      pixbuf = rsvg_handle_get_pixbuf_sub(engine->keysicon[i],
+          engine->iconstate[i] ? "#layer1" : "#layer2");
+
+//      gdk_draw_rectangle(gw,gc,1,i * 40 + 1, YFORSVG, 37, 37);
+
+      if (!pixbuf)
+        {
+          pixbuf = rsvg_handle_get_pixbuf(engine->keysicon[i]);
+        }
+
+      gdk_draw_pixbuf(gw, gc, pixbuf, 0, 0, i * 40 + 1, YFORSVG, 37, 37,
+          GDK_RGB_DITHER_NONE, 0, 0);
+
+      g_object_unref(pixbuf);
+    }
+  //画已经输入的笔画
 
 
-	//画候选字
+  //画候选字
 
 
-
-	g_object_unref(gc);
-	return TRUE;
+  g_object_unref(gc);
+  return TRUE;
 
 }
 
-gboolean on_mouse_move(GtkWidget *widget, GdkEventMotion *event,	gpointer user_data)
+static gboolean
+time_out(gpointer user_data)
 {
-	IBusT9Engine * engine;
+  int i;
+  IBusT9Engine * engine;
 
-	engine = (IBusT9Engine *) (user_data);
+  engine = (IBusT9Engine *) (user_data);
 
-	if (engine->drag)
-	{
-		engine->laststate.x = event->x_root - engine->lastpoint.x;
-		engine->laststate.y = event->y_root - engine->lastpoint.y;
-		gtk_window_move(GTK_WINDOW(widget), engine->laststate.x,
-				engine->laststate.y);
-	}
-	return FALSE;
+  for (i = 0; i < 5; ++i)
+    {
+      engine->iconstate[i] = 0;
+    }
+
+  return FALSE;
 }
 
-gboolean on_button(GtkWidget* widget, GdkEventButton *event, gpointer user_data)
+gboolean
+on_mouse_move(GtkWidget *widget, GdkEventMotion *event, gpointer user_data)
 {
-	IBusT9Engine * engine;
-	LineStoken * token;
+  int i;
+  IBusT9Engine * engine;
+  GdkWindow * gw;
+  GdkRectangle regtangle;
+  GdkRegion * reg;
 
-	engine = (IBusT9Engine *) (user_data);
+  engine = (IBusT9Engine *) (user_data);
 
-	switch (event->type)
-	{
+  gw = widget->window;
 
-	case GDK_BUTTON_PRESS:
-		if(event->button != 1)
-		{
-			engine->drag = TRUE;
-			engine->lastpoint.x = event->x;
-			engine->lastpoint.y = event->y;
-			return ;
-		}else
-		{
-			engine->drag = FALSE;
-		}
-		break;
-	case GDK_BUTTON_RELEASE:break;
-	}
+  if (engine->drag)
+    {
+      engine->laststate.x = event->x_root - engine->lastpoint.x;
+      engine->laststate.y = event->y_root - engine->lastpoint.y;
+      gtk_window_move(GTK_WINDOW(widget), engine->laststate.x,
+          engine->laststate.y);
+    }
+  else
+    {
+        g_print("move\n");
+//        return TRUE;
+//      for (i = 0; i < 5; ++i)
+//        {
+//          regtangle.height = regtangle.width = 37;
+//          regtangle.y = YFORSVG;
+//          regtangle.x = i * 40 + 3;
+//
+//          reg = gdk_region_rectangle(&regtangle);
+//
+//          g_print("state[%d] = %d \n ",i,engine->iconstate[i] = gdk_region_point_in(reg, event->x, event->y));
+//
+//          gdk_region_destroy(reg);
+//        }
+//      gdk_window_invalidate_rect(gw, 0, 0);
+    }
+  return TRUE;
+}
+
+gboolean
+on_button(GtkWidget* widget, GdkEventButton *event, gpointer user_data)
+{
+  int i;
+  IBusT9Engine * engine;
+  LineStoken * token;
+  GdkRegion * reg;
+  GdkRectangle  regtangle;
+
+  engine = (IBusT9Engine *) (user_data);
+
+  engine->drag = event->button != 1;
+  switch (event->type)
+    {
+
+  case GDK_BUTTON_PRESS:
+    if (event->button != 1)
+      {
+        engine->lastpoint.x = event->x;
+        engine->lastpoint.y = event->y;
+        return FALSE;
+      }
+    else
+      {
+        for (i = 0; i < 5; ++i)
+          {
+            regtangle.height = regtangle.width = 37;
+            regtangle.y = YFORSVG;
+            regtangle.x = i * 40 + 3;
+
+            reg = gdk_region_rectangle(&regtangle);
+
+            engine ->iconstate[i]
+                = gdk_region_point_in(reg, event->x, event->y);
+
+       //     g_timeout_add(500, time_out, engine);
+
+            static char bihua[5][8] = { "横","竖","撇","捺","折" };
+            if(engine ->iconstate[i])
+              g_printf("%s clicked\n",bihua[i]);
+
+            gdk_region_destroy(reg);
+          }
+      }
+    break;
+  case GDK_BUTTON_RELEASE:
+    for (i = 0; i < 5; ++i)
+      {
+        engine->iconstate[i] = 0;
+      }
+    break;
+    }
+  gdk_window_invalidate_rect(widget->window, 0, 0);
+  return TRUE;
 }

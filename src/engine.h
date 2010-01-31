@@ -22,8 +22,9 @@ struct _IBusT9Engine {
 	GtkWidget* LookupTable;
 	GdkRectangle laststate;
 	GdkPoint lastpoint;
-	guint	drag;
+	guint drag;
 	RsvgHandle *keysicon[5];
+	gboolean iconstate[5];
 };
 
 struct _IBusT9EngineClass {
