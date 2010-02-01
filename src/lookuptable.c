@@ -27,7 +27,7 @@
 #include <librsvg/rsvg-cairo.h>
 #include "lookuptable.h"
 
-#define YFORSVG  80
+#define YFORSVG  63
 
 static void
 svg_set_size(gint *width, gint *height, gpointer user_data)
@@ -132,7 +132,7 @@ on_paint(GtkWidget *widget, GdkEventExpose *event, gpointer user_data)
 
       ly = gtk_widget_create_pango_layout(widget,phrase);
 
-      gdk_draw_layout(gw, gc, 40 *( i % 5), (i /5 ) * 22 + 20, ly);
+      gdk_draw_layout(gw, gc, 40 *( i % 5) + 5, (i /5 ) * 22 + 20, ly);
 
       g_object_unref(ly);
 

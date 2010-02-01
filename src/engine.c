@@ -117,7 +117,7 @@ ibus_t9_engine_init(IBusT9Engine *engine)
   engine->laststate.x = 300;
   engine->laststate.y = 300;
   engine->laststate.width = 200;
-  engine->laststate.height = 120;
+  engine->laststate.height = 100;
   engine->drag = 0;
 
   klass = IBUS_T9_ENGINE_GET_CLASS(engine);
