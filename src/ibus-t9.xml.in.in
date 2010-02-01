@@ -1,9 +1,9 @@
 <?xml version=\"1.0\" encoding=\"utf-8\"?>
 <!-- filename: enchant.xml -->
 <component>
-	<name>org.freedesktop.IBus.t9</name>
-	<description>HandWrite Component</description>
-	<exec>${libexecdir}/ibus-engine-t9 --ibus</exec>
+	<name>org.freedesktop.IBus.T9</name>
+	<description>T9输入法</description>
+	<exec>${libexecdir}/ibus-engine-t9 --ibus </exec>
 	<version>@VERSION@</version>
 	<author>Microcai &lt;microcai AT fedoraproject DOT org &gt;</author>
 	<license>GPL</license>
@@ -12,7 +12,7 @@
 
 	<engines>
 		<engine>
-			<name>ibus-t9</name>
+			<name>T9</name>
 			<language>zh_CN</language>
 			<license>GPL</license>
 			<author>Microcai &lt;microcai AT fedoraproject DOT org &gt;</author>

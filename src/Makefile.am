@@ -19,6 +19,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+libexecdir = ${prefix}/share/ibus/engine
 
 AM_CFLAGS=  @RSVG_CFLAGS@ @IBUS_CFLAGS@ @GTK2_CFLAGS@ -DPKGDATADIR=\"$(pkgdatadir)\" -DPREFIX=\"$(prefix)\"
 AM_LDFLAGS = @IBUS_LIBS@ @GTK2_LIBS@ @RSVG_LIBS@
@@ -31,10 +32,10 @@ component_DATA = ibus-t9.xml
 
 componentdir = @datadir@/ibus/component
 
-EXTRA_DIST = handwrite.xml.in 
+EXTRA_DIST = ibus-t9.xml.in
 
 CLEANFILES = \
-	handwrite.xml \
+	ibus-t9.xml \
 	$(NULL)
 
 ibus-t9.xml : ibus-t9.xml.in
