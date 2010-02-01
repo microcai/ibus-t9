@@ -36,6 +36,40 @@ svg_set_size(gint *width, gint *height, gpointer user_data)
   *width = *height = GPOINTER_TO_SIZE(user_data);
 }
 
+static void
+draw_inputed(GdkDrawable * gw, GdkGC * gc, GString * inputed,RsvgHandle * icons[])
+{
+  int i;
+  GdkPixbuf * px;
+  for (i = 0; i < 5; i++)
+    rsvg_handle_set_size_callback(icons[i], svg_set_size,GSIZE_TO_POINTER(14), 0);
+
+  for (i = 0; i < inputed ->len; i++)
+    {
+      switch (inputed->str[i])
+        {
+      case 'h':
+        px = rsvg_handle_get_pixbuf(icons[0]);
+        break;
+      case 's':
+        px = rsvg_handle_get_pixbuf(icons[1]);
+        break;
+      case 'p':
+        px = rsvg_handle_get_pixbuf(icons[2]);
+        break;
+      case 'n':
+        px = rsvg_handle_get_pixbuf(icons[3]);
+        break;
+      case 'z':
+        px = rsvg_handle_get_pixbuf(icons[4]);
+        break;
+        }
+      gdk_draw_pixbuf(gw,gc,px,0,0,i*15,2,14,14,GDK_RGB_DITHER_NONE,0,0);
+
+      g_object_unref(px);
+    }
+}
+
 gboolean
 on_paint(GtkWidget *widget, GdkEventExpose *event, gpointer user_data)
 {
@@ -81,11 +115,10 @@ on_paint(GtkWidget *widget, GdkEventExpose *event, gpointer user_data)
   //画已经输入的笔画
   if (widget, engine->inputed->len)
     {
-      ly = gtk_widget_create_pango_layout(widget, engine->inputed->str);
-
-      gdk_draw_layout(gw, gc, 0, 0, ly);
-
-      g_object_unref(ly);
+      draw_inputed(gw,gc,engine->inputed,engine->keysicon);
+//    ly = gtk_widget_create_pango_layout(widget, );
+//    gdk_draw_layout(gw, gc, 0, 0, ly);
+//    g_object_unref(ly);
     }
 
   //画候选字

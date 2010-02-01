@@ -16,10 +16,36 @@
    sodipodi:version="0.32"
    inkscape:version="0.47pre4 r22446"
    version="1.0"
-   sodipodi:docname="zhengma.svg"
-   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+   sodipodi:docname="ibus-t9.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="/home/cai/workspace/ibus-t9/icons/ibus-t9.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs3180">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient2850">
+      <stop
+         style="stop-color:#ff0000;stop-opacity:1;"
+         offset="0"
+         id="stop2852" />
+      <stop
+         style="stop-color:#ff0000;stop-opacity:0;"
+         offset="1"
+         id="stop2854" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient2842">
+      <stop
+         style="stop-color:#03ff00;stop-opacity:1;"
+         offset="0"
+         id="stop2844" />
+      <stop
+         style="stop-color:#0000ff;stop-opacity:0;"
+         offset="1"
+         id="stop2846" />
+    </linearGradient>
     <linearGradient
        id="linearGradient3165">
       <stop
@@ -48,6 +74,33 @@
        inkscape:vp_z="744.09448 : 526.18109 : 1"
        inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
        id="perspective3186" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2842"
+       id="linearGradient2848"
+       x1="17.54084"
+       y1="21.750929"
+       x2="10.042061"
+       y2="35.382187"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2850"
+       id="linearGradient2856"
+       x1="35.512806"
+       y1="20.904203"
+       x2="22.997128"
+       y2="45.249531"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2842"
+       id="linearGradient2864"
+       x1="12.452471"
+       y1="36.180588"
+       x2="29.840267"
+       y2="29.285006"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -60,16 +113,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="3.7546246"
-     inkscape:cx="-16.889839"
-     inkscape:cy="11.723609"
+     inkscape:cx="-5.5442308"
+     inkscape:cy="11.557306"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showgrid="false"
-     inkscape:window-width="777"
-     inkscape:window-height="753"
-     inkscape:window-x="41"
+     inkscape:window-width="1440"
+     inkscape:window-height="850"
+     inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="0" />
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata3183">
     <rdf:RDF>
@@ -78,44 +131,69 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="base"
+     style="display:inline">
+    <text
+       xml:space="preserve"
+       style="display:inline;font-size:14.29681777999999959px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:url(#linearGradient2864);fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="0.97437698"
+       y="40.147236"
+       id="text2821"
+       transform="scale(0.89831207,1.1131989)"><tspan
+         sodipodi:role="line"
+         id="tspan2823"
+         x="0.97437698"
+         y="40.147236"
+         style="fill:url(#linearGradient2864);fill-opacity:1">ibus</tspan></text>
+  </g>
+  <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     style="display:inline">
     <path
        sodipodi:type="arc"
-       style="opacity:1;fill:#6b6b6b;fill-opacity:0.22110554;stroke:none;stroke-width:0.37799999;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#6b6b6b;fill-opacity:0.22110554;stroke:none"
        id="path2390"
        sodipodi:cx="25.357143"
        sodipodi:cy="45.357143"
        sodipodi:rx="15.642858"
        sodipodi:ry="2.3571429"
-       d="M 41.000001,45.357143 A 15.642858,2.3571429 0 1 1 9.7142859,45.357143 A 15.642858,2.3571429 0 1 1 41.000001,45.357143 z"
+       d="m 41.000001,45.357143 a 15.642858,2.3571429 0 1 1 -31.2857151,0 15.642858,2.3571429 0 1 1 31.2857151,0 z"
        transform="matrix(1.2852743,0,0,1.5342323,-7.3903485,-25.528799)" />
-    <text
-       xml:space="preserve"
-       style="font-size:47.47431183px;font-style:normal;font-weight:normal;fill:#0000ff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="2.2880857"
-       y="39.903076"
-       id="text2819"
-       transform="scale(1.0608906,0.9426043)"><tspan
-         sodipodi:role="line"
-         id="tspan2821"
-         x="2.2880857"
-         y="39.903076">T</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:46.92968369px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ff0000;fill-opacity:1;stroke:none;font-family:cmmi10;-inkscape-font-specification:cmmi10 Medium"
-       x="20.774218"
-       y="35.67601"
-       id="text2823"
-       transform="scale(1.0574689,0.94565428)"><tspan
-         sodipodi:role="line"
-         id="tspan2825"
-         x="20.774218"
-         y="35.67601">9</tspan></text>
+    <g
+       id="g2828">
+      <text
+         transform="scale(1.0608906,0.94260428)"
+         id="text2819"
+         y="39.055408"
+         x="3.0412405"
+         style="font-size:47.47431183000000487px;font-style:normal;font-weight:normal;fill:url(#linearGradient2848);fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="39.055408"
+           x="3.0412405"
+           id="tspan2821"
+           sodipodi:role="line"
+           style="fill-opacity:1;fill:url(#linearGradient2848)">T</tspan></text>
+      <text
+         transform="scale(1.0574689,0.94565428)"
+         id="text2823"
+         y="35.11272"
+         x="21.026081"
+         style="font-size:46.92968368999999740px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:url(#linearGradient2856);fill-opacity:1;stroke:none;font-family:cmmi10;-inkscape-font-specification:cmmi10 Medium"
+         xml:space="preserve"><tspan
+           y="35.11272"
+           x="21.026081"
+           id="tspan2825"
+           sodipodi:role="line"
+           style="fill-opacity:1;fill:url(#linearGradient2856)">9</tspan></text>
+    </g>
   </g>
 </svg>

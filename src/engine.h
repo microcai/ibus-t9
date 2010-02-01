@@ -33,7 +33,7 @@ struct _IBusT9Engine
 
   GString * inputed;
   GArray * matched;
-
+  guint    page;
 };
 
 struct _IBusT9EngineClass
