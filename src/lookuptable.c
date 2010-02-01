@@ -116,23 +116,23 @@ on_paint(GtkWidget *widget, GdkEventExpose *event, gpointer user_data)
   if (widget, engine->inputed->len)
     {
       draw_inputed(gw,gc,engine->inputed,engine->keysicon);
-//    ly = gtk_widget_create_pango_layout(widget, );
-//    gdk_draw_layout(gw, gc, 0, 0, ly);
-//    g_object_unref(ly);
     }
 
   //画候选字
 
   int len = engine->matched->len;
-  if (len > 5)
-    len = 5;
+  if (len > 10)
+    len = 10;
 
   for (i = 0; i < len; ++i)
     {
-      ly = gtk_widget_create_pango_layout(widget,
-          g_array_index(engine->matched,MATCHED,i).hanzi);
 
-      gdk_draw_layout(gw, gc, 20 * i, 20, ly);
+      char phrase[32];
+      snprintf(phrase,32,"%d.%s",i,g_array_index(engine->matched,MATCHED,i).hanzi);
+
+      ly = gtk_widget_create_pango_layout(widget,phrase);
+
+      gdk_draw_layout(gw, gc, 40 *( i % 5), (i /5 ) * 22 + 20, ly);
 
       g_object_unref(ly);
 
