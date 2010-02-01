@@ -45,6 +45,8 @@ on_paint(GtkWidget *widget, GdkEventExpose *event, gpointer user_data)
   IBusT9Engine * engine;
   GdkWindow* gw;
 
+  PangoLayout * ly;
+
   engine = (IBusT9Engine *) (user_data);
 
   int size = 37;
@@ -77,11 +79,30 @@ on_paint(GtkWidget *widget, GdkEventExpose *event, gpointer user_data)
       g_object_unref(pixbuf);
     }
   //画已经输入的笔画
+  ly = gtk_widget_create_pango_layout(widget,engine->inputed->str);
 
+  gdk_draw_layout(gw,gc,0,0,ly);
 
-  //画候选字
+  g_object_unref(ly);
 
+   //画候选字
 
+  int len = engine->matched->len;
+  if (len > 5)
+    len = 5;
+
+  for (i = 0; i <  len ; ++i)
+    {
+      ly = gtk_widget_create_pango_layout(widget,
+          g_array_index(engine->matched,MATCHED,i).hanzi);
+
+      gdk_draw_layout(gw, gc, 20 * i , 20  , ly);
+
+      g_object_unref(ly);
+
+    }
+
+//  g_object_unref(ly);
   g_object_unref(gc);
   return TRUE;
 
@@ -150,7 +171,6 @@ on_button(GtkWidget* widget, GdkEventButton *event, gpointer user_data)
   int i;
   IBusT9Engine * engine;
   IBusT9EngineClass   *klass;
-  LineStoken * token;
   GdkRegion * reg;
   GdkRectangle  regtangle;
 
@@ -188,10 +208,8 @@ on_button(GtkWidget* widget, GdkEventButton *event, gpointer user_data)
             if (engine ->iconstate[i])
               {
                 g_printf("%s clicked\n", bihua[i]);
-                GValue val;
-                g_value_init(&val,0);
 //                g_signal_emit_by_name(engine,"process_key_event",engine,IBUS_KP_0,0,0,&val);
-                klass->parent.process_key_event(IBUS_ENGINE(engine), IBUS_KP_0 + i, IBUS_KP_0 + i, 0);
+                klass->parent.process_key_event(IBUS_ENGINE(engine), IBUS_KP_1 + i, IBUS_KP_1 + i, 0);
               }
             gdk_region_destroy(reg);
           }

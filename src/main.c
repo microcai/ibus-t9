@@ -32,7 +32,7 @@ static void ibus_disconnected_cb(IBusBus *bus, gpointer user_data)
 	gtk_main_quit();
 }
 
-char DATAFILE[1024] = PKGDATADIR"/tables/t9.txt";
+char DATAFILE[1024] = PKGDATADIR"/tables/table.txt";
 static int have_ibus;
 char icondir[4096] = "icons/";
 struct parameter_tags paramters[] =

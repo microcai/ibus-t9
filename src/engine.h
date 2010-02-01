@@ -7,8 +7,16 @@
 #include <gtk/gtk.h>
 #include <librsvg/rsvg.h>
 
+typedef struct _PHRASER PHRASER;
 typedef struct _IBusT9Engine IBusT9Engine;
 typedef struct _IBusT9EngineClass IBusT9EngineClass;
+
+typedef struct _MATCHED MATCHED;
+
+struct _MATCHED{
+  char  code[64-16];
+  char  hanzi[16];
+};
 
 struct _IBusT9Engine
 {
@@ -25,7 +33,8 @@ struct _IBusT9Engine
   gboolean iconstate[5];
 
   GString * inputed;
-  GList   * matched;
+  GArray * matched;
+
 };
 
 struct _IBusT9EngineClass
@@ -33,6 +42,7 @@ struct _IBusT9EngineClass
   IBusEngineClass parent;
   sqlite3 * lookupdb;
   GString * icondir;
+  PHRASER * phraser;
 };
 
 #define IBUS_TYPE_T9_ENGINE	\
@@ -46,21 +56,16 @@ ibus_t9_engine_get_type(void);
 #define IBUS_T9_ENGINE(obj)             \
     (G_TYPE_CHECK_INSTANCE_CAST ((obj), IBUS_TYPE_T9_ENGINE, IBusT9Engine))
 
-typedef struct _LineStoken LineStoken;
-
-struct _LineStoken
+struct _PHRASER
 {
-  int segments; //包含有的段数目
-  GdkPoint* points; //包含的用来构成笔画的点
+  char * filename;
+  char * start_ptr; // for nmaped access
+  size_t fsize; //for nmaped access
 };
-
-typedef struct _RESULTCHAR RESULTCHAR;
-
-struct _RESULTCHAR
-{
-  gchar charactor[20];
-  gfloat score;
-};
+PHRASER * phraser_new(char * file);
+void phraser_free(PHRASER*phraser);
+int phraser_optimise(PHRASER * phraser);
+int phraser_get_phrases(GArray * result, GString * input, PHRASER * phraser);
 
 extern char DATAFILE[]; //= "data/handwriting-zh_CN.model";
 extern char icondir[];

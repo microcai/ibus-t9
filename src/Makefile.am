@@ -25,7 +25,7 @@ AM_LDFLAGS = @IBUS_LIBS@ @GTK2_LIBS@ @SQLITE_LIBS@ @RSVG_LIBS@
 
 libexec_PROGRAMS = ibus-engine-t9
 
-ibus_engine_t9_SOURCES =  main.c 	engine.c 	engine.h	prase.c prase.h lookuptable.c lookuptable.h
+ibus_engine_t9_SOURCES =  main.c 	engine.c 	engine.h prase.c prase.h lookuptable.c lookuptable.h decoder.c
 
 component_DATA = ibus-t9.xml 
 
@@ -46,4 +46,4 @@ ibus-t9.xml : ibus-t9.xml.in
 	) > $@
 
 test: ibus-engine-t9
-	./$<  --icon $(top_srcdir)/icons/ --table $(top_srcdir)/table/t9.txt
+	./$<  --icon $(top_srcdir)/icons/ --table $(top_srcdir)/tables/table.txt

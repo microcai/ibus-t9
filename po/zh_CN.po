@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.01\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/ibus/issues/entry\n"
-"POT-Creation-Date: 2010-01-31 02:35+0800\n"
-"PO-Revision-Date: 2010-01-31 02:36+0800\n"
+"POT-Creation-Date: 2010-02-01 03:53+0800\n"
+"PO-Revision-Date: 2010-02-01 03:54+0800\n"
 "Last-Translator: microcai <microcai@fedoraproject.org>\n"
 "Language-Team: zh_CN <microcai@fedoraproject.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,12 @@ msgstr "T9 输入法"
 msgid "ibus-t9 Version %s Start Up\n"
 msgstr "ibus-T9 版本 %s 启动\n"
 
-#: src/engine.c:140
+#: src/engine.c:102
+#, c-format
+msgid "cannot open %s"
+msgstr "无法打开%s"
+
+#: src/engine.c:132
 #, c-format
 msgid "Err opening %s : %s\n"
 msgstr "打开 %s 时发生错误 %s \n"
