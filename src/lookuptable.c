@@ -79,24 +79,27 @@ on_paint(GtkWidget *widget, GdkEventExpose *event, gpointer user_data)
       g_object_unref(pixbuf);
     }
   //画已经输入的笔画
-  ly = gtk_widget_create_pango_layout(widget,engine->inputed->str);
+  if (widget, engine->inputed->len)
+    {
+      ly = gtk_widget_create_pango_layout(widget, engine->inputed->str);
 
-  gdk_draw_layout(gw,gc,0,0,ly);
+      gdk_draw_layout(gw, gc, 0, 0, ly);
 
-  g_object_unref(ly);
+      g_object_unref(ly);
+    }
 
-   //画候选字
+  //画候选字
 
   int len = engine->matched->len;
   if (len > 5)
     len = 5;
 
-  for (i = 0; i <  len ; ++i)
+  for (i = 0; i < len; ++i)
     {
       ly = gtk_widget_create_pango_layout(widget,
           g_array_index(engine->matched,MATCHED,i).hanzi);
 
-      gdk_draw_layout(gw, gc, 20 * i , 20  , ly);
+      gdk_draw_layout(gw, gc, 20 * i, 20, ly);
 
       g_object_unref(ly);
 

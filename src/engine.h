@@ -2,7 +2,6 @@
 #ifndef __ENGINE_H__
 #define __ENGINE_H__
 
-#include <sqlite3.h>
 #include <ibus.h>
 #include <gtk/gtk.h>
 #include <librsvg/rsvg.h>
@@ -40,7 +39,6 @@ struct _IBusT9Engine
 struct _IBusT9EngineClass
 {
   IBusEngineClass parent;
-  sqlite3 * lookupdb;
   GString * icondir;
   PHRASER * phraser;
 };

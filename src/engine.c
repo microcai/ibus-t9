@@ -174,6 +174,7 @@ ibus_t9_engine_commit_string(IBusT9Engine *engine, guint index)
           g_array_index(engine->matched,MATCHED,index).hanzi);
       ibus_engine_commit_text((IBusEngine *) engine, text);
       g_object_unref(text);
+      g_string_truncate(engine->inputed,0);
       return TRUE;
     }
   return FALSE;

@@ -66,10 +66,7 @@ PKG_CHECK_MODULES(IBUS, [
 ])
 
 PKG_CHECK_MODULES(GTK2, [
-    gtk+-2.0 >= 1.2
-])
-PKG_CHECK_MODULES(SQLITE, [
-    sqlite3
+    gtk+-2.0 >= 2.10
 ])
 
 PKG_CHECK_MODULES(RSVG, [
