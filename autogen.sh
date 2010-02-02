@@ -10,6 +10,3 @@ automake --add-missing --copy
 autoconf
 export CFLAGS="-g -O0 -DDEBUG"
 export CXXFLAGS="$CFLAGS"
-mkdir -p build
-cd build
-../configure --prefix=/usr --enable-maintainer-mode $*
