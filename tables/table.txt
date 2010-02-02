@@ -5553,6 +5553,7 @@ pnnpszsshzhhznhsn	爵
 pnpn	父
 pnpnzs	爷
 pnpnzshz	爸
+pnnpzshz	爸
 pnpnpznpzn	爹
 pnpnhsshhhzs	爺
 pnpn	爻

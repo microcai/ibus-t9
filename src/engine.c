@@ -255,7 +255,7 @@ ibus_t9_engine_process_key_event(IBusEngine *ibusengine, guint keyval,
   case IBUS_KP_5:
     engine->inputed = g_string_append_c(engine->inputed, 'z');
     return ibus_t9_engine_update(engine);
-  case IBUS_0 ... IBUS_5:
+  case IBUS_0 ... IBUS_9:
     return ibus_t9_engine_commit_string(engine, keyval - IBUS_0);
     }
 
