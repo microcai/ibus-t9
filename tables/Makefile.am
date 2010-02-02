@@ -19,11 +19,11 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+EXTRA_DIST = table.txt
+
 tables_DATA = table.txt
 
 tablesdir = $(pkgdatadir)/tables
-
-EXTRA_DIST =  $(NULL)
 
 t9table.txt : 
 	touch $@
