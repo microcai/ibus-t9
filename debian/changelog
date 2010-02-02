@@ -1,1 +1,6 @@
-../ChangeLog
+ibus-t9 (1.2.0-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- G.S.Alex <i@gsalex.net>  Tue, 02 Feb 2010 16:07:02 +0800
+
