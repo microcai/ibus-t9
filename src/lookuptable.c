@@ -139,6 +139,9 @@ on_paint(GtkWidget *widget, GdkEventExpose *event, gpointer user_data)
     }
 
 //  g_object_unref(ly);
+
+//  gdk_draw_arc(GDK_DRAWABLE(gw) ,gc,1,30,30,30,30,-180*64,-90*64);
+
   g_object_unref(gc);
   return TRUE;
 
@@ -206,9 +209,9 @@ on_button(GtkWidget* widget, GdkEventButton *event, gpointer user_data)
 {
   int i;
   IBusT9Engine * engine;
-  IBusT9EngineClass   *klass;
+  IBusT9EngineClass *klass;
   GdkRegion * reg;
-  GdkRectangle  regtangle;
+  GdkRectangle regtangle;
 
   engine = (IBusT9Engine *) (user_data);
   klass = IBUS_T9_ENGINE_GET_CLASS(engine);
@@ -237,18 +240,27 @@ on_button(GtkWidget* widget, GdkEventButton *event, gpointer user_data)
             engine ->iconstate[i]
                 = gdk_region_point_in(reg, event->x, event->y);
 
-       //     g_timeout_add(500, time_out, engine);
+            //     g_timeout_add(500, time_out, engine);
 
             static char bihua[5][8] =
               { "横", "竖", "撇", "捺", "折" };
             if (engine ->iconstate[i])
               {
                 g_printf("%s clicked\n", bihua[i]);
-//                g_signal_emit_by_name(engine,"process_key_event",engine,IBUS_KP_0,0,0,&val);
-                klass->parent.process_key_event(IBUS_ENGINE(engine), IBUS_KP_1 + i, IBUS_KP_1 + i, 0);
+                //                g_signal_emit_by_name(engine,"process_key_event",engine,IBUS_KP_0,0,0,&val);
+                klass->parent.process_key_event(IBUS_ENGINE(engine), IBUS_KP_1
+                    + i, IBUS_KP_1 + i, 0);
+                gdk_window_invalidate_rect(widget->window, 0, 0);
+                return TRUE;
               }
             gdk_region_destroy(reg);
           }
+        for (i = 0; i < 10; ++i) //判断按下的字
+          {
+
+          }
+
+
       }
     break;
   case GDK_BUTTON_RELEASE:

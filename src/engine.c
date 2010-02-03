@@ -109,6 +109,11 @@ ibus_t9_engine_init(IBusT9Engine *engine)
 {
   size_t i;
   IBusT9EngineClass* klass;
+  GdkRegion * region;
+  GdkPixmap * pxmp;
+  GdkGC * gc;
+  GdkWindow * gw;
+  GdkColor black, white;
 
   char icon_file[4096];
 
@@ -134,10 +139,43 @@ ibus_t9_engine_init(IBusT9Engine *engine)
 
   engine->LookupTable = gtk_window_new(GTK_WINDOW_POPUP);
 
+
+  gtk_widget_show_all(engine->LookupTable);
+
+  gw = engine->LookupTable->window;
+
+  GdkColormap* colormap = gdk_colormap_get_system();
+
+  gdk_color_black(colormap, &black);
+  gdk_color_white(colormap, &white);
+
+  g_object_unref(colormap);
+
+  //  region = gdk_region_new();
+  pxmp = gdk_pixmap_new(NULL, engine->laststate.width, engine->laststate.height, 1);
+  gc = gdk_gc_new(GDK_DRAWABLE(pxmp));
+
+  gdk_gc_set_foreground(gc, &black);
+
+  gdk_draw_rectangle(GDK_DRAWABLE(pxmp),gc,1,0,0,engine->laststate.width,engine->laststate.height);
+
+  gdk_gc_set_foreground(gc, &white);
+
+  gdk_draw_arc(GDK_DRAWABLE(pxmp), gc, 1, 0, 0, 30, 30, 0, 360 * 64);
+  gdk_draw_arc(GDK_DRAWABLE(pxmp), gc, 1, engine->laststate.width - 30,0,30,30,0,360 * 64);
+  gdk_draw_arc(GDK_DRAWABLE(pxmp),gc,1,engine->laststate.width - 30,engine->laststate.height - 30,30,30,0,360 * 64);
+  gdk_draw_arc(GDK_DRAWABLE(pxmp),gc,1,0,engine->laststate.height - 30,30,30,0,360 * 64);
+  gdk_draw_rectangle(GDK_DRAWABLE(pxmp),gc,1,0,15,engine->laststate.width ,engine->laststate.height - 30);
+  gdk_draw_rectangle(GDK_DRAWABLE(pxmp),gc,1,15,0,engine->laststate.width - 30,engine->laststate.height);
+
+  gdk_window_shape_combine_mask(gw,pxmp,0,0);
+
+  g_object_unref(gc);
+  g_object_unref(pxmp);
+
+
   gtk_window_move(GTK_WINDOW(engine->LookupTable), engine->laststate.x,
       engine->laststate.y);
-  gtk_window_resize(GTK_WINDOW(engine->LookupTable), engine->laststate.width,
-      engine->laststate.height);
 
   gtk_widget_add_events(GTK_WIDGET(engine->LookupTable), GDK_BUTTON_MOTION_MASK
       | GDK_BUTTON_RELEASE_MASK | GDK_BUTTON_PRESS_MASK | GDK_EXPOSURE_MASK);

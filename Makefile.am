@@ -60,3 +60,7 @@ clean-local: clean-rpm
 
 test:
 	cd src && $(MAKE) $@
+
+install_tables:
+	cd tables && $(MAKE) all
+
