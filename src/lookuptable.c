@@ -91,6 +91,8 @@ on_paint(GtkWidget *widget, GdkEventExpose *event, gpointer user_data)
 
   int i;
 
+  gdk_gc_set_clip_region (gc,event->region);
+
   for (i = 0; i < 5; i++) //画笔画
     {
       //按下状态还是不一样的

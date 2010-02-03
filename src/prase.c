@@ -1,9 +1,3 @@
-/*****************************************************//*******************************************************************************\
- * RuijieClient -- a CLI based Ruijie Client authentication modified from mystar *
- *                                                                               *
- * Copyright (C) microcai (microcai@sina.com)             *
- \*******************************************************************************/
-
 /*
  * Parse the command line arguments, and read form config file
  * (if not overrided by command line argument )*

@@ -126,9 +126,6 @@ phraser_get_phrases(GArray * result, GString * input, PHRASER * phraser)
   int i,size;
   MATCHED mt;
 
-  //构造sscanf 需要的格式字符串
-  printf("%s %%s\n", input->str);
-
   g_array_set_size(result, 0);
 
   for (start_ptr = ptr = phraser->start_ptr; (ptr - start_ptr) < phraser->fsize; ptr

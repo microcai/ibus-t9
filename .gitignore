@@ -23,3 +23,7 @@ po/*
 !po/Makevars
 !po/LINGUAS
 !po/*.po
+build-stamp
+debian/files
+debian/ibus-t9/
+debian/ibus-t9*
