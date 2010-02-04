@@ -11,9 +11,9 @@ Architecture: any
 Depends: libibus1 (>= 1.2.0.20090828) , librsvg2-2 , libgtk2.0-0 , ibus (>= 1.2)
 Suggests: 
 Description: IBus T9 Input Method .
-ibus-t9 is an input method engine for Chinese ,base on ibus.
-.
-this package provide one input method:
-  * t9: t9 input method.
-.
-for more information on t9 input method,check http://en.wikipedia.org/wiki/T9 .
+ ibus-t9 is an input method engine for Chinese ,base on ibus.
+ .
+ this package provide one input method:
+ * t9: t9 input method.
+ .
+ for more information on t9 input method,check http://en.wikipedia.org/wiki/T9 .
