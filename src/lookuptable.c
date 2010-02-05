@@ -257,11 +257,21 @@ on_button(GtkWidget* widget, GdkEventButton *event, gpointer user_data)
               }
             gdk_region_destroy(reg);
           }
-        for (i = 0; i < 10; ++i) //判断按下的字
+
+        int x = event->x;
+        int y = event->y;
+        //看鼠标点击的是哪个字，吼吼
+
+        for (i = 9; i >= 0; --i)
           {
-
+            if ((40 *( i % 5) + 5) <= x && ((i /5 ) * 22 + 20 <= y))
+              {
+                printf("user click %d\n", i);
+                IBUS_T9_ENGINE_GET_CLASS(engine)->commit_string(engine, i);
+                break;
+              }
+            //                              (205 + (20 * (i / 5)) );
           }
-
 
       }
     break;

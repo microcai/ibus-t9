@@ -41,6 +41,7 @@ struct _IBusT9EngineClass
   IBusEngineClass parent;
   GString * icondir;
   PHRASER * phraser;
+  int  (*commit_string)(IBusT9Engine *engine, guint index);
 };
 
 #define IBUS_TYPE_T9_ENGINE	\

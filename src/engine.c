@@ -56,6 +56,8 @@ static void
 ibus_t9_engine_property_show(IBusEngine *engine, const gchar *prop_name);
 static void
 ibus_t9_engine_property_hide(IBusEngine *engine, const gchar *prop_name);
+static int
+ibus_t9_engine_commit_string(IBusT9Engine *engine, guint index);
 
 GType
 ibus_t9_engine_get_type(void)
@@ -100,6 +102,8 @@ ibus_t9_engine_class_init(IBusT9EngineClass *klass)
   if((klass->phraser = phraser_new(DATAFILE)))
       phraser_optimise(klass->phraser);
   else g_error(_("cannot open %s"),DATAFILE);
+
+  klass->commit_string = ibus_t9_engine_commit_string;
 
   rsvg_init();
 }
