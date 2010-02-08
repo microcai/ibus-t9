@@ -126,7 +126,7 @@ phraser_get_phrases(GArray * result, GString * input, PHRASER * phraser)
   int i,size;
   MATCHED mt;
 
-  g_array_set_size(result, 0);
+  result = g_array_set_size(result, 0);
 
   for (start_ptr = ptr = phraser->start_ptr; (ptr - start_ptr) < phraser->fsize; ptr
       += 64)
@@ -142,7 +142,7 @@ phraser_get_phrases(GArray * result, GString * input, PHRASER * phraser)
           while (*p == ' ' || *p == '\t')
             ++p;
           strcpy(mt.hanzi, p);
-          g_array_append_val(result,mt );
+          result = g_array_append_val(result,mt );
           size++;
         }
     }
