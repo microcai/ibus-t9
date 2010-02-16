@@ -21,8 +21,9 @@
 
 libexecdir = ${prefix}/share/ibus/engine
 
-AM_CFLAGS=  @RSVG_CFLAGS@ @IBUS_CFLAGS@ @GTK2_CFLAGS@ -DPKGDATADIR=\"$(pkgdatadir)\" -DPREFIX=\"$(prefix)\"
-AM_LDFLAGS = @IBUS_LIBS@ @GTK2_LIBS@ @RSVG_LIBS@
+INCLUDES =  @RSVG_CFLAGS@ @IBUS_CFLAGS@ @GTK2_CFLAGS@  -DPKGDATADIR=\"$(pkgdatadir)\" -DPREFIX=\"$(prefix)\"
+
+LIBS = @IBUS_LIBS@ @GTK2_LIBS@ @RSVG_LIBS@
 
 libexec_PROGRAMS = ibus-engine-t9
 
