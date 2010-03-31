@@ -17,6 +17,12 @@ struct _MATCHED{
   char  hanzi[16];
 };
 
+struct button_data
+{
+	IBusT9Engine * engine;
+	int index;
+};
+
 struct _IBusT9Engine
 {
   IBusEngine parent;
@@ -25,6 +31,8 @@ struct _IBusT9Engine
 
   //  IBusLookupTable *table;
   GtkWidget* LookupTable;
+  GtkWidget* tables;
+  GtkWidget* box;
   GdkRectangle laststate;
   GdkPoint lastpoint;
   guint drag;
@@ -34,6 +42,9 @@ struct _IBusT9Engine
   GString * inputed;
   GArray * matched;
   guint    page;
+
+  struct button_data	stok_botton_call_back[5];
+  struct button_data	table_botton_call_back[10];
 };
 
 struct _IBusT9EngineClass

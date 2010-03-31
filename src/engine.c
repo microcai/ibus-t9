@@ -113,13 +113,6 @@ ibus_t9_engine_init(IBusT9Engine *engine)
 {
   size_t i;
   IBusT9EngineClass* klass;
-  GdkRegion * region;
-  GdkPixmap * pxmp;
-  GdkGC * gc;
-  GdkWindow * gw;
-  GdkColor black, white;
-
-  char icon_file[4096];
 
   GError * err;
 
@@ -131,65 +124,75 @@ ibus_t9_engine_init(IBusT9Engine *engine)
 
   klass = IBUS_T9_ENGINE_GET_CLASS(engine);
 
+  engine->LookupTable = gtk_window_new(GTK_WINDOW_POPUP);
+
+  engine->box = gtk_vbox_new(FALSE,0);
+
+  gtk_container_add(GTK_CONTAINER(engine->LookupTable),engine->box);
+
+  GtkWidget * hb = gtk_hbox_new(TRUE,0);
+
+  gtk_box_pack_end_defaults(GTK_BOX(engine->box),hb);
+
   for (i = 0; i < 5; ++i)
     {
       err = NULL;
-      sprintf(icon_file, "%s/key%u.svg", klass->icondir->str, i + 1);
+      gchar *  icon_file ;
+
+      struct button_data * callback_data = & engine->stok_botton_call_back[i];
+      callback_data->engine = engine;
+      callback_data->index = i;
+
+      icon_file = g_strdup_printf("%s/key%lu.svg", klass->icondir->str, i + 1);
       g_message("load %s \n", icon_file);
+
       engine->keysicon[i] = rsvg_handle_new_from_file(icon_file, &err);
       if (engine->keysicon[i] == NULL)
-        g_error(_("Err opening %s : %s\n"), icon_file, err ? err->message : "");
+         g_error(_("Err opening %s : %s\n"), icon_file, err ? err->message : "");
+
+      g_free(icon_file);
+
+      rsvg_handle_set_size_callback(engine->keysicon[i], svg_set_size,GSIZE_TO_POINTER(33), 0);
+
+      GdkPixbuf * px = rsvg_handle_get_pixbuf(engine->keysicon[i]);
+
+      GtkWidget * gtkimg = gtk_image_new_from_pixbuf(px);
+
+      GtkWidget* bt = gtk_button_new();
+      gtk_button_set_image(GTK_BUTTON(bt),gtkimg);
+	  gtk_box_pack_start_defaults(GTK_BOX(hb),bt);
+	  g_signal_connect(G_OBJECT(bt),"clicked",G_CALLBACK(button_clicked),callback_data);
     }
 
-  engine->LookupTable = gtk_window_new(GTK_WINDOW_POPUP);
+  GtkWidget * head = gtk_image_new();
 
+  gtk_widget_set_size_request(head,200,30);
 
-  gtk_widget_show_all(engine->LookupTable);
+  gtk_box_pack_start(GTK_BOX(engine->box),head,TRUE,TRUE,FALSE);
 
-  gw = engine->LookupTable->window;
+  g_signal_connect(G_OBJECT(head),"expose-event",G_CALLBACK(on_paint),engine);
 
-  GdkColormap* colormap = gdk_colormap_get_system();
+  engine->tables = gtk_table_new(2, 5, TRUE);
 
-  gdk_color_black(colormap, &black);
-  gdk_color_white(colormap, &white);
+  gtk_widget_set_size_request(engine->tables,200,80);
 
-  g_object_unref(colormap);
-
-  //  region = gdk_region_new();
-  pxmp = gdk_pixmap_new(NULL, engine->laststate.width, engine->laststate.height, 1);
-  gc = gdk_gc_new(GDK_DRAWABLE(pxmp));
-
-  gdk_gc_set_foreground(gc, &black);
-
-  gdk_draw_rectangle(GDK_DRAWABLE(pxmp),gc,1,0,0,engine->laststate.width,engine->laststate.height);
-
-  gdk_gc_set_foreground(gc, &white);
-
-  gdk_draw_arc(GDK_DRAWABLE(pxmp), gc, 1, 0, 0, 30, 30, 0, 360 * 64);
-  gdk_draw_arc(GDK_DRAWABLE(pxmp), gc, 1, engine->laststate.width - 30,0,30,30,0,360 * 64);
-  gdk_draw_arc(GDK_DRAWABLE(pxmp),gc,1,engine->laststate.width - 30,engine->laststate.height - 30,30,30,0,360 * 64);
-  gdk_draw_arc(GDK_DRAWABLE(pxmp),gc,1,0,engine->laststate.height - 30,30,30,0,360 * 64);
-  gdk_draw_rectangle(GDK_DRAWABLE(pxmp),gc,1,0,15,engine->laststate.width ,engine->laststate.height - 30);
-  gdk_draw_rectangle(GDK_DRAWABLE(pxmp),gc,1,15,0,engine->laststate.width - 30,engine->laststate.height);
-
-  gdk_window_shape_combine_mask(gw,pxmp,0,0);
-
-  g_object_unref(gc);
-  g_object_unref(pxmp);
-
+  gtk_box_pack_start(GTK_BOX(engine->box),engine->tables,TRUE,TRUE,TRUE);
 
   gtk_window_move(GTK_WINDOW(engine->LookupTable), engine->laststate.x,
       engine->laststate.y);
 
+//gtk_window_resize(GTK_WINDOW(engine->LookupTable),200,200);
+
   gtk_widget_add_events(GTK_WIDGET(engine->LookupTable), GDK_BUTTON_MOTION_MASK
       | GDK_BUTTON_RELEASE_MASK | GDK_BUTTON_PRESS_MASK | GDK_EXPOSURE_MASK);
   g_signal_connect_after(G_OBJECT(engine->LookupTable),"motion_notify_event",G_CALLBACK(on_mouse_move),engine);
-  g_signal_connect(G_OBJECT(engine->LookupTable),"expose-event",G_CALLBACK(on_paint),engine);
   g_signal_connect(G_OBJECT(engine->LookupTable),"button-release-event",G_CALLBACK(on_button),engine);
   g_signal_connect(G_OBJECT(engine->LookupTable),"button-press-event",G_CALLBACK(on_button),engine);
+  g_signal_connect(G_OBJECT(engine->LookupTable),"realize",G_CALLBACK(widget_realize),engine);
 
   engine->matched = g_array_sized_new(FALSE, TRUE, sizeof(MATCHED), 20);
   engine->inputed = g_string_new("");
+  gtk_widget_show_all(engine->LookupTable);
 }
 
 static void
@@ -225,14 +228,48 @@ ibus_t9_engine_commit_string(IBusT9Engine *engine, guint index)
 static gboolean
 ibus_t9_engine_update(IBusT9Engine *engine)
 {
+//	gtk_container_remove(GTK_CONTAINER(engine->box),engine->tables);
+
+	gtk_widget_destroy(engine->tables);
+
+	engine->tables = gtk_table_new(2, 5, TRUE);
+
+	gtk_widget_set_size_request(engine->tables, 200, 80);
+
+	gtk_box_pack_start(GTK_BOX(engine->box), engine->tables, TRUE, TRUE, TRUE);
+
   if (engine->inputed->len)
     {
       g_print("input is now %s\n", engine->inputed->str);
       phraser_get_phrases(engine->matched, engine->inputed,
           IBUS_T9_ENGINE_GET_CLASS(engine)->phraser);
     }
-  else g_array_set_size(engine->matched,0);
- gdk_window_invalidate_rect(engine->LookupTable->window,0,0);
+  else
+	  engine->matched = g_array_set_size(engine->matched,0);
+  int i;
+
+  for( i =0; i < MIN(engine->matched->len,10) ; ++i )
+  {
+	  struct button_data * callback_data = & engine->table_botton_call_back[i];
+
+	  callback_data->engine = engine;
+
+	  callback_data->index = i;
+
+	  g_print("create button with %s\n",g_array_index(engine->matched,MATCHED,i).hanzi);
+
+	  GtkWidget * child = gtk_button_new_with_label(g_array_index(engine->matched,MATCHED,i).hanzi);
+
+	  gtk_table_attach_defaults(GTK_TABLE(engine->tables), child, i % 5, i % 5 + 1,	i / 5, i / 5 + 1);
+
+	  g_signal_connect(G_OBJECT(child),"clicked",G_CALLBACK(table_button_clicked),callback_data);
+
+	  gtk_widget_show(child);
+  }
+
+  gtk_widget_show(engine->tables);
+
+ //gdk_window_invalidate_rect(engine->LookupTable->window,0,0);
  return TRUE;
 }
 
