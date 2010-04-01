@@ -209,20 +209,17 @@ ibus_t9_engine_destroy(IBusT9Engine *engine)
   IBUS_OBJECT_CLASS(g_type_class_peek_parent(IBUS_ENGINE_GET_CLASS(engine)))->destroy(IBUS_OBJECT(engine));
 }
 
-static int
-ibus_t9_engine_commit_string(IBusT9Engine *engine, guint index)
+static int ibus_t9_engine_commit_string(IBusT9Engine *engine, guint index)
 {
-  IBusText *text;
-  if (engine->matched->len > index)
-    {
-      text = ibus_text_new_from_static_string(
-          g_array_index(engine->matched,MATCHED,index).hanzi);
-      ibus_engine_commit_text((IBusEngine *) engine, text);
-      g_object_unref(text);
-      g_string_truncate(engine->inputed,0);
-      return TRUE;
-    }
-  return FALSE;
+	if (engine->matched->len > index)
+	{
+		ibus_engine_commit_text((IBusEngine *) engine,
+				ibus_text_new_from_static_string(
+						g_array_index(engine->matched,MATCHED,index).hanzi));
+		g_string_truncate(engine->inputed, 0);
+		return TRUE;
+	}
+	return FALSE;
 }
 
 static gboolean
