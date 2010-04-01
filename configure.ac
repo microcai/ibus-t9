@@ -62,7 +62,7 @@ AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION(0.16.1)
 
 PKG_CHECK_MODULES(IBUS, [
-    ibus-1.0 >= 1.2
+    ibus-1.0 >= 1.3
 ])
 
 PKG_CHECK_MODULES(GTK2, [
@@ -72,6 +72,11 @@ PKG_CHECK_MODULES(GTK2, [
 PKG_CHECK_MODULES(RSVG, [
 	librsvg-2.0
 ])
+
+PKG_CHECK_MODULES(ALL, [
+	librsvg-2.0 gtk+-2.0 >= 2.10 ibus-1.0 >= 1.3
+])
+
 
 AC_DEFINE(MICROCAI_WITHEMAIL,"microcai@fedoraproject.org",[author microcai and his email])
 
