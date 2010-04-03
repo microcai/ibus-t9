@@ -24,7 +24,6 @@
 #include <string.h>
 #include <cairo/cairo.h>
 #include "engine.h"
-#include <librsvg/rsvg-cairo.h>
 #include "lookuptable.h"
 
 #define YFORSVG  63

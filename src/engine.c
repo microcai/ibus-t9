@@ -105,8 +105,6 @@ ibus_t9_engine_class_init(IBusT9EngineClass *klass)
   else g_error(_("cannot open %s"),DATAFILE);
 
   klass->commit_string = ibus_t9_engine_commit_string;
-
-  rsvg_init();
 }
 
 static void

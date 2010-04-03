@@ -4,7 +4,6 @@
 
 #include <ibus.h>
 #include <gtk/gtk.h>
-#include <librsvg/rsvg.h>
 
 typedef struct _PHRASER PHRASER;
 typedef struct _IBusT9Engine IBusT9Engine;
