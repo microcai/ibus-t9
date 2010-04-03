@@ -41,7 +41,7 @@ DISTCLEANFILES = ibus_t9.icons.h
 all : ibus_t9.icons.h
 
 ibus_t9.icons.h : $(icons_DATA)
-	gdk-pixbuf-csource --raw --static --build-list \
+	@GDK_PIXBUF_CSOURCE@ --raw --static --build-list \
 		$(ICON_PREFIX)_key1 $(srcdir)/key1.svg  \
 		$(ICON_PREFIX)_key2 $(srcdir)/key2.svg  \
 		$(ICON_PREFIX)_key3 $(srcdir)/key3.svg  \

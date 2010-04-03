@@ -61,6 +61,7 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Define to the read-only 
 AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION(0.16.1)
 
+
 PKG_CHECK_MODULES(IBUS, [
     ibus-1.0 >= 1.2
 ])
@@ -72,6 +73,11 @@ PKG_CHECK_MODULES(GTK2, [
 PKG_CHECK_MODULES(ALL, [
 	gtk+-2.0 >= 2.10 ibus-1.0 >= 1.2
 ])
+
+AC_PATH_PROG(GDK_PIXBUF_CSOURCE,gdk-pixbuf-csource,["no"])
+
+AS_IF([test "x${GDK_PIXBUF_CSOURCE}" = "xno"],[AC_MSG_FAILURE(gdk-pixbuf-csource not found,1)])
+
 
 AC_DEFINE(MICROCAI_WITHEMAIL,"microcai@fedoraproject.org",[author microcai and his email])
 
