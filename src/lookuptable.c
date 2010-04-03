@@ -36,35 +36,34 @@ void svg_set_size(gint *width, gint *height, gpointer user_data)
 }
 
 static void
-draw_inputed(GdkDrawable * gw, GdkGC * gc, GString * inputed,RsvgHandle * icons[])
+draw_inputed(GdkDrawable * gw, GdkGC * gc, GString * inputed,GdkPixbuf * icons[])
 {
   int i;
   GdkPixbuf * px;
-  for (i = 0; i < 5; i++)
-    rsvg_handle_set_size_callback(icons[i], svg_set_size,GSIZE_TO_POINTER(14), 0);
+  GdkPixbuf * icon;
 
   for (i = 0; i < inputed ->len; i++)
-    {
-      switch (inputed->str[i])
-        {
-      case 'h':
-        px = rsvg_handle_get_pixbuf(icons[0]);
-        break;
-      case 's':
-        px = rsvg_handle_get_pixbuf(icons[1]);
-        break;
-      case 'p':
-        px = rsvg_handle_get_pixbuf(icons[2]);
-        break;
-      case 'n':
-        px = rsvg_handle_get_pixbuf(icons[3]);
-        break;
-      case 'z':
-        px = rsvg_handle_get_pixbuf(icons[4]);
-        break;
-        }
+	{
+		switch (inputed->str[i])
+		{
+		case 'h':
+			icon = icons[0];
+			break;
+		case 's':
+			icon = icons[1];
+			break;
+		case 'p':
+			icon = icons[2];
+			break;
+		case 'n':
+			icon = icons[3];
+			break;
+		case 'z':
+			icon = icons[4];
+			break;
+		}
+      px = gdk_pixbuf_scale_simple(icon,14,14,GDK_INTERP_HYPER);
       gdk_draw_pixbuf(gw,gc,px,0,0,i*15+5,4,14,14,GDK_RGB_DITHER_NONE,0,0);
-
       g_object_unref(px);
     }
 }

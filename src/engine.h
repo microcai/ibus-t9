@@ -36,7 +36,7 @@ struct _IBusT9Engine
   GdkRectangle laststate;
   GdkPoint lastpoint;
   guint drag;
-  RsvgHandle *keysicon[5];
+  GdkPixbuf *keysicon[5];
   gboolean iconstate[5];
 
   GString * inputed;

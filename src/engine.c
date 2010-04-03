@@ -19,6 +19,7 @@
 
 #include "engine.h"
 #include "lookuptable.h"
+#include "../icons/ibus_t9.icons.h"
 
 /* functions prototype */
 static void
@@ -113,6 +114,7 @@ ibus_t9_engine_init(IBusT9Engine *engine)
 {
   size_t i;
   IBusT9EngineClass* klass;
+  GdkPixbuf * px;
 
   GError * err;
 
@@ -134,6 +136,9 @@ ibus_t9_engine_init(IBusT9Engine *engine)
 
   gtk_box_pack_end_defaults(GTK_BOX(engine->box),hb);
 
+  const guint8 * ibus_t9_icon_key[] =
+  {	  ibus_t9_icon_key1, ibus_t9_icon_key2, ibus_t9_icon_key3, ibus_t9_icon_key4, ibus_t9_icon_key5 };
+
   for (i = 0; i < 5; ++i)
     {
       err = NULL;
@@ -143,20 +148,11 @@ ibus_t9_engine_init(IBusT9Engine *engine)
       callback_data->engine = engine;
       callback_data->index = i;
 
-      icon_file = g_strdup_printf("%s/key%lu.svg", klass->icondir->str, i + 1);
-      g_message("load %s \n", icon_file);
+      engine->keysicon[i] = gdk_pixbuf_new_from_inline(-1,ibus_t9_icon_key[i],FALSE,NULL);
 
-      engine->keysicon[i] = rsvg_handle_new_from_file(icon_file, &err);
-      if (engine->keysicon[i] == NULL)
-         g_error(_("Err opening %s : %s\n"), icon_file, err ? err->message : "");
-
-      g_free(icon_file);
-
-      rsvg_handle_set_size_callback(engine->keysicon[i], svg_set_size,GSIZE_TO_POINTER(33), 0);
-
-      GdkPixbuf * px = rsvg_handle_get_pixbuf(engine->keysicon[i]);
-
+      px = gdk_pixbuf_scale_simple(engine->keysicon[i],32,32,GDK_INTERP_HYPER);
       GtkWidget * gtkimg = gtk_image_new_from_pixbuf(px);
+      g_object_unref(px);
 
       GtkWidget* bt = gtk_button_new();
       gtk_button_set_image(GTK_BUTTON(bt),gtkimg);
@@ -291,11 +287,12 @@ ibus_t9_engine_process_key_event(IBusEngine *ibusengine, guint keyval,
   switch (keyval)
     {
   case IBUS_space:
-    return ibus_t9_engine_commit_string(engine, 0);
   case IBUS_Return:
-    return ibus_t9_engine_commit_string(engine, 0);
-
+	  if(engine->inputed->len)
+		  return ibus_t9_engine_commit_string(engine, 0);
+	  else return FALSE;
   case IBUS_Escape:
+
     return TRUE;
 
   case IBUS_Left:

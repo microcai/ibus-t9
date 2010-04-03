@@ -18,11 +18,11 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-SUBDIRS = src 	icons 	m4 	tables po
+SUBDIRS = 	po icons src tables
 
 ACLOCAL_AMFLAGS = -I m4
 
-EXTRA_DIST = \
+EXTRA_DIST = m4 debian \
 	autogen.sh \
 	@PACKAGE_NAME@.spec.in \
 	$(NULL)
@@ -31,9 +31,9 @@ noinst_DIST = \
 	$(NULL)
 
 
-#DISTCLEANFILES = \
-#	po/stamp-it \
-#	$(NULL)
+DISTCLEANFILES = \
+	po/stamp-it \
+	$(NULL)
 
 rpm: dist @PACKAGE_NAME@.spec
 	rpmbuild -bb \

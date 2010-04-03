@@ -18,6 +18,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+ICON_PREFIX = ibus_t9_icon
+
 icons_DATA = \
 	ibus-t9.svg \
 	full-letter.svg \
@@ -32,3 +35,15 @@ iconsdir = $(pkgdatadir)/icons
 EXTRA_DIST = \
 	$(icons_DATA) \
 	$(NULL)
+
+DISTCLEANFILES = ibus_t9.icons.h
+
+all : ibus_t9.icons.h
+
+ibus_t9.icons.h : $(icons_DATA)
+	gdk-pixbuf-csource --raw --static --build-list \
+		$(ICON_PREFIX)_key1 $(srcdir)/key1.svg  \
+		$(ICON_PREFIX)_key2 $(srcdir)/key2.svg  \
+		$(ICON_PREFIX)_key3 $(srcdir)/key3.svg  \
+		$(ICON_PREFIX)_key4 $(srcdir)/key4.svg \
+		$(ICON_PREFIX)_key5 $(srcdir)/key5.svg  > $@	
