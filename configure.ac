@@ -88,7 +88,6 @@ src/Makefile
 src/ibus-t9.xml.in
 icons/Makefile
 tables/Makefile
-m4/Makefile
 )
 
 AC_OUTPUT
