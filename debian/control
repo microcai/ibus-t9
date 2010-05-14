@@ -2,7 +2,7 @@ Source: ibus-t9
 Section: utils
 Priority: optional
 Maintainer: microcai<microcaicai@gmail.com>
-Build-Depends: debhelper (>= 7), autotools-dev , libibus-dev, libgtk2.0-dev , libglib2.0-dev
+Build-Depends: debhelper (>= 7), autotools-dev , libibus-dev, libgtk2.0-dev , libglib2.0-dev , librsvg2-dev
 Standards-Version: 3.8.4
 Homepage: http://ibus-t9.googlecode.com
 
