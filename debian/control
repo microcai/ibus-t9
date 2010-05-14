@@ -2,13 +2,13 @@ Source: ibus-t9
 Section: utils
 Priority: optional
 Maintainer: microcai<microcaicai@gmail.com>
-Build-Depends: debhelper (>= 7), autotools-dev ,libibus-dev, librsvg2-dev , libgtk2.0-dev , libglib2.0-dev
-Standards-Version: 3.8.2
+Build-Depends: debhelper (>= 7), autotools-dev , libibus-dev, libgtk2.0-dev , libglib2.0-dev
+Standards-Version: 3.8.4
 Homepage: http://ibus-t9.googlecode.com
 
 Package: ibus-t9
 Architecture: any
-Depends: libibus1 (>= 1.2.0.20090828) , librsvg2-2 , libgtk2.0-0 , ibus (>= 1.2)
+Depends: ${shlibs:Depends} 
 Suggests: 
 Description: IBus T9 Input Method .
  ibus-t9 is an input method engine for Chinese ,base on ibus.
