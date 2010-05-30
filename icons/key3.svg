@@ -14,7 +14,7 @@
    height="48px"
    id="svg2869"
    version="1.1"
-   inkscape:version="0.47pre4 r22446"
+   inkscape:version="0.47 r22583"
    sodipodi:docname="key3.svg">
   <defs
      id="defs2871">
@@ -784,16 +784,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7"
-     inkscape:cx="-26.939488"
+     inkscape:cx="-0.056970382"
      inkscape:cy="25.200986"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
      inkscape:window-width="1440"
-     inkscape:window-height="850"
+     inkscape:window-height="825"
      inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-y="24"
      inkscape:window-maximized="1"
      inkscape:snap-global="true"
      inkscape:snap-bbox="true"
@@ -815,7 +815,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -832,27 +832,22 @@
        transform="matrix(0.6410708,0,0,0.41746416,50.39515,7.7172289)"
        id="g2957"
        style="display:inline;filter:url(#filter3096)">
-      <text
-         xml:space="preserve"
-         style="font-size:144px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#0000ff;fill-opacity:1;stroke:none;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN;"
-         x="-68.571426"
-         y="95.428574"
-         id="text2959"><tspan
-           sodipodi:role="line"
-           id="tspan2961"
-           x="-68.571426"
-           y="95.428574">丿</tspan></text>
-      <text
-         id="text2963"
-         y="95.428574"
-         x="-68.571426"
-         style="font-size:144px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:url(#linearGradient2967);fill-opacity:1;stroke:none;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN;"
-         xml:space="preserve"><tspan
-           y="95.428574"
-           x="-68.571426"
-           id="tspan2965"
-           sodipodi:role="line"
-           style="fill:url(#linearGradient2967);fill-opacity:1;">丿</tspan></text>
+      <g
+         style="font-size:144px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#0000ff;fill-opacity:1;stroke:none;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN"
+         id="text2959">
+        <path
+           d="M -34.680801,0.36607361 C -33.274587,38.99113 -39.040206,65.475479 -51.977676,79.819199 c -2.343765,2.531263 -5.203137,5.34376 -8.578125,8.4375 -1.218757,0.656256 -1.968756,1.218756 -2.25,1.6875 -0.375006,0.656254 0.234369,0.984379 1.828125,0.984375 3.656238,4e-6 9.468733,-3.703117 17.4375,-11.109375 11.249963,-10.968724 16.874958,-31.828078 16.875,-62.578125 -4.2e-5,-8.7186635 0.890582,-16.0311562 2.671875,-21.9375004 0.374955,-1.2186486 0.14058,-2.2030227 -0.703125,-2.953125 -1.968792,-1.4998954 -4.734415,-2.9530186 -8.296875,-4.3593746 -2.250034,-0.937392 -4.218782,-1.078017 -5.90625,-0.421875 -1.968778,0.843857 -2.109403,2.10948 -0.421875,3.7968746 2.906217,2.9063512 4.453091,5.9063482 4.640625,9.00000001"
+           style=""
+           id="path3724" />
+      </g>
+      <g
+         style="font-size:144px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:url(#linearGradient2967);fill-opacity:1;stroke:none;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN"
+         id="text2963">
+        <path
+           d="M -34.680801,0.36607361 C -33.274587,38.99113 -39.040206,65.475479 -51.977676,79.819199 c -2.343765,2.531263 -5.203137,5.34376 -8.578125,8.4375 -1.218757,0.656256 -1.968756,1.218756 -2.25,1.6875 -0.375006,0.656254 0.234369,0.984379 1.828125,0.984375 3.656238,4e-6 9.468733,-3.703117 17.4375,-11.109375 11.249963,-10.968724 16.874958,-31.828078 16.875,-62.578125 -4.2e-5,-8.7186635 0.890582,-16.0311562 2.671875,-21.9375004 0.374955,-1.2186486 0.14058,-2.2030227 -0.703125,-2.953125 -1.968792,-1.4998954 -4.734415,-2.9530186 -8.296875,-4.3593746 -2.250034,-0.937392 -4.218782,-1.078017 -5.90625,-0.421875 -1.968778,0.843857 -2.109403,2.10948 -0.421875,3.7968746 2.906217,2.9063512 4.453091,5.9063482 4.640625,9.00000001"
+           style=""
+           id="path3721" />
+      </g>
     </g>
   </g>
   <g
@@ -864,27 +859,22 @@
        style="display:inline"
        id="g3002"
        transform="matrix(0.6410708,0,0,0.41746416,50.424347,7.6778217)">
-      <text
-         id="text3004"
-         y="95.428574"
-         x="-68.571426"
+      <g
          style="font-size:144px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#0000ff;fill-opacity:1;stroke:none;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN"
-         xml:space="preserve"><tspan
-           y="95.428574"
-           x="-68.571426"
-           id="tspan3006"
-           sodipodi:role="line">丿</tspan></text>
-      <text
-         xml:space="preserve"
+         id="text3004">
+        <path
+           d="M -34.680801,0.36607361 C -33.274587,38.99113 -39.040206,65.475479 -51.977676,79.819199 c -2.343765,2.531263 -5.203137,5.34376 -8.578125,8.4375 -1.218757,0.656256 -1.968756,1.218756 -2.25,1.6875 -0.375006,0.656254 0.234369,0.984379 1.828125,0.984375 3.656238,4e-6 9.468733,-3.703117 17.4375,-11.109375 11.249963,-10.968724 16.874958,-31.828078 16.875,-62.578125 -4.2e-5,-8.7186635 0.890582,-16.0311562 2.671875,-21.9375004 0.374955,-1.2186486 0.14058,-2.2030227 -0.703125,-2.953125 -1.968792,-1.4998954 -4.734415,-2.9530186 -8.296875,-4.3593746 -2.250034,-0.937392 -4.218782,-1.078017 -5.90625,-0.421875 -1.968778,0.843857 -2.109403,2.10948 -0.421875,3.7968746 2.906217,2.9063512 4.453091,5.9063482 4.640625,9.00000001"
+           style=""
+           id="path3715" />
+      </g>
+      <g
          style="font-size:144px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:url(#linearGradient3043);fill-opacity:1;stroke:none;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN"
-         x="-68.571426"
-         y="95.428574"
-         id="text3008"><tspan
-           style="fill:url(#linearGradient3043);fill-opacity:1"
-           sodipodi:role="line"
-           id="tspan3010"
-           x="-68.571426"
-           y="95.428574">丿</tspan></text>
+         id="text3008">
+        <path
+           d="M -34.680801,0.36607361 C -33.274587,38.99113 -39.040206,65.475479 -51.977676,79.819199 c -2.343765,2.531263 -5.203137,5.34376 -8.578125,8.4375 -1.218757,0.656256 -1.968756,1.218756 -2.25,1.6875 -0.375006,0.656254 0.234369,0.984379 1.828125,0.984375 3.656238,4e-6 9.468733,-3.703117 17.4375,-11.109375 11.249963,-10.968724 16.874958,-31.828078 16.875,-62.578125 -4.2e-5,-8.7186635 0.890582,-16.0311562 2.671875,-21.9375004 0.374955,-1.2186486 0.14058,-2.2030227 -0.703125,-2.953125 -1.968792,-1.4998954 -4.734415,-2.9530186 -8.296875,-4.3593746 -2.250034,-0.937392 -4.218782,-1.078017 -5.90625,-0.421875 -1.968778,0.843857 -2.109403,2.10948 -0.421875,3.7968746 2.906217,2.9063512 4.453091,5.9063482 4.640625,9.00000001"
+           style=""
+           id="path3718" />
+      </g>
     </g>
   </g>
 </svg>

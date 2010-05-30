@@ -14,7 +14,7 @@
    height="48px"
    id="svg2869"
    version="1.1"
-   inkscape:version="0.47pre4 r22446"
+   inkscape:version="0.47 r22583"
    sodipodi:docname="key1.svg">
   <defs
      id="defs2871">
@@ -218,9 +218,9 @@
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
      inkscape:window-width="1440"
-     inkscape:window-height="850"
+     inkscape:window-height="825"
      inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-y="24"
      inkscape:window-maximized="1"
      inkscape:snap-bbox="true"
      inkscape:snap-global="true" />
@@ -232,7 +232,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -244,30 +244,24 @@
     <g
        id="g2918"
        style="filter:url(#filter2844)">
-      <text
+      <g
          transform="scale(0.98637461,1.0138136)"
-         id="text2816"
-         y="45.070259"
-         x="-4.1887331"
          style="font-size:55.66330719px;font-style:normal;font-weight:normal;fill:#0000ff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-         xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#0000ff;fill-opacity:1;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold"
-           y="45.070259"
-           x="-4.1887331"
-           id="tspan2818"
-           sodipodi:role="line">一</tspan></text>
-      <text
+         id="text2816">
+        <path
+           d="m 2.0081585,22.946269 c -0.5798317,2.2e-5 -0.9059836,0.253696 -0.9784566,0.761022 -0.0362443,0.579847 0.3623858,1.195911 1.1958914,1.848195 1.8481875,1.413345 3.5876641,1.884453 5.2184351,1.413327 4.3486796,-1.522024 12.5024766,-2.645436 24.4614146,-3.37024 3.841308,-0.217413 8.298717,0.01814 13.372239,0.706663 1.087124,0.144977 1.757547,0.01814 2.011272,-0.380511 0.36234,-0.579804 0.271742,-1.15963 -0.271793,-1.739478 -1.340898,-1.232106 -3.007896,-2.319279 -5.001,-3.261522 -0.65235,-0.253647 -1.558328,-0.199289 -2.717935,0.163076 -1.522086,0.434895 -3.334041,0.761047 -5.43587,0.978457 -9.458442,0.869763 -17.050533,1.630784 -22.776295,2.283065 -3.4789683,0.471131 -6.5049329,0.670446 -9.0779025,0.597946"
+           style="font-variant:normal;font-weight:bold;font-stretch:normal;fill:#0000ff;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold"
+           id="path3897" />
+      </g>
+      <g
          transform="scale(0.99734576,1.0026613)"
-         xml:space="preserve"
          style="font-size:54.47754669px;font-style:normal;font-weight:normal;fill:url(#linearGradient2855);fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-         x="-3.7515485"
-         y="44.859474"
-         id="text2845"><tspan
-           sodipodi:role="line"
-           id="tspan2847"
-           x="-3.7515485"
-           y="44.859474"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:url(#linearGradient2855);fill-opacity:1;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold">一</tspan></text>
+         id="text2845">
+        <path
+           d="m 2.3133346,23.206777 c -0.5674799,2.2e-5 -0.886684,0.248292 -0.9576131,0.744811 -0.035472,0.567494 0.354666,1.170435 1.170416,1.808824 1.8088167,1.383237 3.5112384,1.84431 5.10727,1.383219 C 11.88945,25.65403 19.869552,24.55455 31.573736,23.845186 c 3.759479,-0.212782 8.121934,0.01775 13.087379,0.69161 1.063965,0.141888 1.720107,0.01775 1.968427,-0.372405 0.354621,-0.567454 0.265953,-1.134928 -0.266004,-1.702424 -1.312333,-1.205859 -2.94382,-2.269873 -4.894467,-3.192044 -0.638453,-0.248244 -1.525131,-0.195043 -2.660036,0.159603 -1.489662,0.42563 -3.263018,0.744835 -5.320073,0.957613 -9.256955,0.851235 -16.687316,1.596045 -22.291106,2.23443 -3.4048578,0.461095 -6.3663621,0.656164 -8.8845214,0.585208"
+           style="font-variant:normal;font-weight:bold;font-stretch:normal;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold"
+           id="path3900" />
+      </g>
     </g>
   </g>
   <g
@@ -278,30 +272,24 @@
     <g
        id="g2998"
        transform="translate(0.14285717,0.14285714)">
-      <text
-         xml:space="preserve"
+      <g
+         transform="scale(0.98637461,1.0138136)"
          style="font-size:55.66330719px;font-style:normal;font-weight:normal;fill:#0000ff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-         x="-4.1887331"
-         y="45.070259"
-         id="text3000"
-         transform="scale(0.98637461,1.0138136)"><tspan
-           sodipodi:role="line"
-           id="tspan3002"
-           x="-4.1887331"
-           y="45.070259"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#0000ff;fill-opacity:1;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold">一</tspan></text>
-      <text
-         id="text3004"
-         y="44.859474"
-         x="-3.7515485"
+         id="text3000">
+        <path
+           d="m 2.0081585,22.946269 c -0.5798317,2.2e-5 -0.9059836,0.253696 -0.9784566,0.761022 -0.0362443,0.579847 0.3623858,1.195911 1.1958914,1.848195 1.8481875,1.413345 3.5876641,1.884453 5.2184351,1.413327 4.3486796,-1.522024 12.5024766,-2.645436 24.4614146,-3.37024 3.841308,-0.217413 8.298717,0.01814 13.372239,0.706663 1.087124,0.144977 1.757547,0.01814 2.011272,-0.380511 0.36234,-0.579804 0.271742,-1.15963 -0.271793,-1.739478 -1.340898,-1.232106 -3.007896,-2.319279 -5.001,-3.261522 -0.65235,-0.253647 -1.558328,-0.199289 -2.717935,0.163076 -1.522086,0.434895 -3.334041,0.761047 -5.43587,0.978457 -9.458442,0.869763 -17.050533,1.630784 -22.776295,2.283065 -3.4789683,0.471131 -6.5049329,0.670446 -9.0779025,0.597946"
+           style="font-variant:normal;font-weight:bold;font-stretch:normal;fill:#0000ff;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold"
+           id="path3903" />
+      </g>
+      <g
+         transform="scale(0.99734576,1.0026613)"
          style="font-size:54.47754669px;font-style:normal;font-weight:normal;fill:url(#linearGradient3022);fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-         xml:space="preserve"
-         transform="scale(0.99734576,1.0026613)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:url(#linearGradient3022);fill-opacity:1;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold"
-           y="44.859474"
-           x="-3.7515485"
-           id="tspan3006"
-           sodipodi:role="line">一</tspan></text>
+         id="text3004">
+        <path
+           d="m 2.3133346,23.206777 c -0.5674799,2.2e-5 -0.886684,0.248292 -0.9576131,0.744811 -0.035472,0.567494 0.354666,1.170435 1.170416,1.808824 1.8088167,1.383237 3.5112384,1.84431 5.10727,1.383219 C 11.88945,25.65403 19.869552,24.55455 31.573736,23.845186 c 3.759479,-0.212782 8.121934,0.01775 13.087379,0.69161 1.063965,0.141888 1.720107,0.01775 1.968427,-0.372405 0.354621,-0.567454 0.265953,-1.134928 -0.266004,-1.702424 -1.312333,-1.205859 -2.94382,-2.269873 -4.894467,-3.192044 -0.638453,-0.248244 -1.525131,-0.195043 -2.660036,0.159603 -1.489662,0.42563 -3.263018,0.744835 -5.320073,0.957613 -9.256955,0.851235 -16.687316,1.596045 -22.291106,2.23443 -3.4048578,0.461095 -6.3663621,0.656164 -8.8845214,0.585208"
+           style="font-variant:normal;font-weight:bold;font-stretch:normal;font-family:AR PL UKai CN;-inkscape-font-specification:AR PL UKai CN Bold"
+           id="path3906" />
+      </g>
     </g>
   </g>
 </svg>
