@@ -71,11 +71,12 @@ struct _PHRASER
   char * start_ptr; // for nmaped access
   size_t fsize; //for nmaped access
 };
-PHRASER * phraser_new(char * file);
+
+PHRASER * phraser_new(const char * file);
 void phraser_free(PHRASER*phraser);
 int phraser_optimise(PHRASER * phraser);
 int phraser_get_phrases(GArray * result, GString * input, PHRASER * phraser);
 
-extern char DATAFILE[]; //= "data/handwriting-zh_CN.model";
-extern char icondir[];
+extern const gchar * datafile; //= "data/handwriting-zh_CN.model";
+extern const char * icondir;
 #endif

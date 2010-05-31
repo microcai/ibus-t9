@@ -31,9 +31,9 @@ static void ibus_disconnected_cb(IBusBus *bus, gpointer user_data)
 	gtk_main_quit();
 }
 
-char DATAFILE[1024] = PKGDATADIR"/tables/table.txt";
+const gchar * datafile = PKGDATADIR"/tables/table.txt";
 static int have_ibus;
-char icondir[4096] = PKGDATADIR"/icons/";
+const char * icondir = PKGDATADIR"/icons/";
 
 static void init_inside(const char *exefile)
 {
@@ -108,7 +108,7 @@ int main(int argc, char* argv[])
 	{
 			{"ibus",'\0',0,G_OPTION_ARG_NONE,&have_ibus},
 			{"icon",'\0',0,G_OPTION_ARG_STRING,&icondir,_("the icon file"),N_("icon file")},
-			{"table",'\0',0,G_OPTION_ARG_STRING,&DATAFILE,_("set table file path"),N_("tablefile")},
+			{"table",'\0',0,G_OPTION_ARG_STRING,&datafile,_("set table file path"),N_("tablefile")},
 			{"locale",'\0',0,G_OPTION_ARG_STRING,&locale_dir,_("set locale path"),N_("locale")},
 			{0}
 	};

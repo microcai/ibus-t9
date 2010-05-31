@@ -37,7 +37,7 @@ static char * nextline(char *);
  */
 
 PHRASER *
-phraser_new(char * file)
+phraser_new(const char * file)
 {
   struct stat state;
   void * ptr;

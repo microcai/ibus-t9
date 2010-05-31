@@ -100,9 +100,9 @@ ibus_t9_engine_class_init(IBusT9EngineClass *klass)
 
   klass->icondir = g_string_new(icondir);
 
-  if((klass->phraser = phraser_new(DATAFILE)))
+  if((klass->phraser = phraser_new(datafile)))
       phraser_optimise(klass->phraser);
-  else g_error(_("cannot open %s"),DATAFILE);
+  else g_error(_("cannot open %s"),datafile);
 
   klass->commit_string = ibus_t9_engine_commit_string;
 }
