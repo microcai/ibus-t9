@@ -22,7 +22,6 @@
 #endif
 
 #include "engine.h"
-#include "prase.h"
 
 static IBusBus *bus = NULL;
 static IBusFactory *factory = NULL;
@@ -35,12 +34,6 @@ static void ibus_disconnected_cb(IBusBus *bus, gpointer user_data)
 char DATAFILE[1024] = PKGDATADIR"/tables/table.txt";
 static int have_ibus;
 char icondir[4096] = PKGDATADIR"/icons/";
-struct parameter_tags paramters[] =
-{
-{ "--ibus", (const char*) &have_ibus, NULL, sizeof(have_ibus), 6, BOOL_both },
-{ "--icon", (const char*) icondir, "--icon the icon dir", sizeof(icondir), 6,	STRING },
-{ "--table", (const char*) DATAFILE, "--table the table file", sizeof(DATAFILE), 7,	STRING },
-{ 0 } };
 
 static void init_inside(const char *exefile)
 {
@@ -105,27 +98,44 @@ static void init_outside(const char * icon_dir, const char *exefile)
 
 int main(int argc, char* argv[])
 {
-  gtk_init(&argc, &argv);
-  ibus_init();
-  ParseParameters(&argc, &argv, paramters);
-  setlocale(LC_ALL, "");
-  gtk_set_locale();
-  textdomain(GETTEXT_PACKAGE);
-  bindtextdomain(GETTEXT_PACKAGE, PREFIX"/share/locale");
-  char exefile[4096] =
-    { 0 };
+	const gchar * locale_dir = NULL;
 
-  if (!have_ibus)
-    {
-      char iconfile[4096] =
-        { 0 };
-      init_outside(realpath(icondir, iconfile), realpath(argv[0], exefile));
-      printf(_("ibus-t9 Version %s Start Up\n"), PACKAGE_VERSION);
-    }
-  else
-    {
-      init_inside(realpath(argv[0], exefile));
-    }
-  gtk_main();
-  return 0;
+	setlocale(LC_ALL, "");
+	gtk_set_locale();
+	textdomain(GETTEXT_PACKAGE);
+
+	GOptionEntry paramters[] =
+	{
+			{"ibus",'\0',0,G_OPTION_ARG_NONE,&have_ibus},
+			{"icon",'\0',0,G_OPTION_ARG_STRING,&icondir,_("the icon file"),N_("icon file")},
+			{"table",'\0',0,G_OPTION_ARG_STRING,&DATAFILE,_("set table file path"),N_("tablefile")},
+			{"locale",'\0',0,G_OPTION_ARG_STRING,&locale_dir,_("set locale path"),N_("locale")},
+			{0}
+	};
+
+	g_assert(gtk_init_with_args(&argc, &argv, GETTEXT_PACKAGE,paramters, GETTEXT_PACKAGE, NULL));
+
+	if(locale_dir)
+	{
+		bindtextdomain(GETTEXT_PACKAGE, locale_dir);
+	}
+
+	ibus_init();
+
+	char exefile[4096] =
+	{ 0 };
+
+	if (!have_ibus)
+	{
+		char iconfile[4096] =
+		{ 0 };
+		init_outside(realpath(icondir, iconfile), realpath(argv[0], exefile));
+		printf(_("ibus-t9 Version %s Start Up\n"), PACKAGE_VERSION);
+	}
+	else
+	{
+		init_inside(realpath(argv[0], exefile));
+	}
+	gtk_main();
+	return 0;
 }
