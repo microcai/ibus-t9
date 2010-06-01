@@ -23,7 +23,7 @@
 
 #include "engine.h"
 
-static IBusBus *bus = NULL;
+IBusBus *bus = NULL;
 static IBusFactory *factory = NULL;
 
 const gchar * datafile = PKGDATADIR"/tables/table.txt";

@@ -67,6 +67,8 @@ ibus_t9_engine_property_hide(IBusEngine *engine, const gchar *prop_name);
 static int
 ibus_t9_engine_commit_string(IBusT9Engine *engine, guint index);
 
+static guint instance_number = 0;
+
 GType
 ibus_t9_engine_get_type(void)
 {
@@ -103,7 +105,7 @@ ibus_t9_engine_class_init(IBusT9EngineClass *klass)
 //
   engine_class->focus_in = ibus_t9_engine_focus_in;
 //
-//  engine_class->focus_out = ibus_t9_engine_focus_out;
+  engine_class->focus_out = ibus_t9_engine_focus_out;
 
   engine_class->property_activate = ibus_t9_property_activate;
 
@@ -121,25 +123,60 @@ ibus_t9_engine_class_init(IBusT9EngineClass *klass)
 static void
 ibus_t9_engine_init(IBusT9Engine *engine)
 {
-  size_t i;
-  IBusT9EngineClass* klass;
-  GdkPixbuf * px;
+	size_t i;
+	IBusT9EngineClass* klass;
+	GdkPixbuf * px;
 
-  GError * err;
+	GError * err;
 
-  klass = IBUS_T9_ENGINE_GET_CLASS(engine);
+	klass = IBUS_T9_ENGINE_GET_CLASS(engine);
 
-  engine->matched = g_array_sized_new(FALSE, TRUE, sizeof(MATCHED), 20);
-  engine->inputed = g_string_new("");
+	engine->matched = g_array_sized_new(FALSE, TRUE, sizeof(MATCHED), 20);
+	engine->inputed = g_string_new("");
 
-  return;
+	if (!instance_number)
+	{
+		GValue value[1] =
+		{ 0 };
+
+		IBusConfig * config = ibus_bus_get_config(bus);
+
+		ibus_config_get_value(config, "panel", "show", value);
+
+		IBUS_T9_ENGINE(engine)->panel_show_old = g_value_get_int(value);
+
+		g_value_set_int(value, 1);
+
+		ibus_config_set_value(config, "panel", "show", value);
+
+		g_print("%s\n", __func__);
+	}
+
+	instance_number ++;
 }
 
 static void
 ibus_t9_engine_destroy(IBusT9Engine *engine)
 {
-  g_print("%s\n", __func__);//, engine->laststate.x, engine->laststate.y);
-  IBUS_OBJECT_CLASS(g_type_class_peek_parent(IBUS_ENGINE_GET_CLASS(engine)))->destroy(IBUS_OBJECT(engine));
+	instance_number --;
+
+	if (!instance_number)
+	{
+
+		GValue value[1] =
+		{ 0 };
+
+		g_value_init(value, G_TYPE_INT);
+
+		g_value_set_int(value, engine->panel_show_old);
+
+		IBusConfig * config = ibus_bus_get_config(bus);
+
+		ibus_config_set_value(config, "panel", "show", value);
+	}
+	g_print("%s\n", __func__);
+	IBUS_OBJECT_CLASS(g_type_class_peek_parent(IBUS_ENGINE_GET_CLASS(engine)))->destroy(
+			IBUS_OBJECT(engine));
 }
 
 static gboolean
@@ -231,7 +268,6 @@ ibus_t9_engine_process_key_event(IBusEngine *ibusengine, guint keyval,
     guint keycode, guint modifiers)
 {
 
-
   IBusText *text;
   IBusT9Engine *engine = (IBusT9Engine *) ibusengine;
 
@@ -302,9 +338,9 @@ ibus_t9_engine_process_key_event(IBusEngine *ibusengine, guint keyval,
 static void
 ibus_t9_engine_enable(IBusEngine *engine)
 {
-//	((IBusT9Engine*)engine)->table = ibus_lookup_table_new(10,0,0,1);
-//	ibus_engine_update_lookup_table(engine,((IBusT9Engine*)engine)->table,1);
 	ibus_t9_engine_update((IBusT9Engine*)engine);
+
+	ibus_t9_engine_focus_in(engine);
 }
 
 static void
@@ -314,6 +350,7 @@ ibus_t9_engine_disable(IBusEngine *engine)
 	ibus_engine_hide_lookup_table(engine);
 }
 
+
 static void
 ibus_t9_engine_focus_in(IBusEngine *engine)
 {
@@ -321,7 +358,6 @@ ibus_t9_engine_focus_in(IBusEngine *engine)
 	IBusProperty * p;
 
 	IBusT9Engine * ibus_t9 = IBUS_T9_ENGINE(engine);
-//	gtk_widget_show_all(ibus_t9->LookupTable);
 
 	IBusPropList * pl = ibus_prop_list_new();
 
@@ -344,15 +380,14 @@ ibus_t9_engine_focus_in(IBusEngine *engine)
 	}
 
 	ibus_engine_register_properties(IBUS_ENGINE(engine), pl);
+
+
 }
 
 static void
 ibus_t9_engine_focus_out(IBusEngine *engine)
 {
-  IBusT9Engine * ibus_t9 = IBUS_T9_ENGINE(engine);
-//  gtk_window_get_position(GTK_WINDOW(ibus_t9->LookupTable),
-//      &ibus_t9->laststate.x, &ibus_t9->laststate.y);
-//  gtk_widget_hide(ibus_t9->LookupTable);
+	IBusT9Engine * ibus_t9 = IBUS_T9_ENGINE(engine);
 }
 
 static void

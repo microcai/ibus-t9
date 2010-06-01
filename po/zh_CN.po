@@ -2,12 +2,11 @@
 # This file is distributed under the same license as the ibus-handwrite package.
 # FIRST AUTHOR <microcai@fedoraproject.org>, 2010.
 # microcai <microcai@fedoraproject.org>, 2010.
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.01\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/ibus/issues/entry\n"
-"POT-Creation-Date: 2010-06-01 12:12+0800\n"
+"POT-Creation-Date: 2010-06-01 13:58+0800\n"
 "PO-Revision-Date: 2010-02-01 03:54+0800\n"
 "Last-Translator: microcai <microcai@fedoraproject.org>\n"
 "Language-Team: zh_CN <microcai@fedoraproject.org>\n"
@@ -16,60 +15,46 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: UTF-8\n"
 
-#: src/main.c:47 src/main.c:78 src/main.c:82
+#: src/main.c:45 src/main.c:75 src/main.c:79
 msgid "T9 input method"
 msgstr "T9 输入法"
 
-#: src/main.c:114
+#: src/main.c:111
 msgid "the icon file"
-msgstr ""
+msgstr "图标文件"
 
-#: src/main.c:114
+#: src/main.c:111
 msgid "icon file"
-msgstr ""
+msgstr "图标文件"
 
-#: src/main.c:115
+#: src/main.c:112
 msgid "set table file path"
-msgstr ""
+msgstr "设置码表文件路径"
 
-#: src/main.c:115
+#: src/main.c:112
 msgid "tablefile"
-msgstr ""
+msgstr "码表"
 
-#: src/main.c:116
+#: src/main.c:113
 msgid "set locale path"
-msgstr ""
+msgstr "翻译目录"
 
-#: src/main.c:116
+#: src/main.c:113
 msgid "locale"
-msgstr ""
+msgstr "语言"
 
-#: src/main.c:137
-#, c-format
+#: src/main.c:136
 msgid "ibus-t9 Version %s Start Up\n"
 msgstr "ibus-T9 版本 %s 启动\n"
 
 #: src/engine.c:116
-#, c-format
 msgid "cannot open %s"
 msgstr "无法打开%s"
 
-#: src/engine.c:306
+#: src/engine.c:363
 msgid "key"
-msgstr ""
+msgstr "按键"
 
-#: src/engine.c:308
+#: src/engine.c:365
 msgid "click to input"
-msgstr ""
-
-#~ msgid "Err opening %s : %s\n"
-#~ msgstr "打开 %s 时发生错误 %s \n"
-
-#~ msgid "ibus-T9"
-#~ msgstr "ibus-T9 输入法"
-
-#~ msgid "hand write recognizer"
-#~ msgstr "手写识别"
-
-#~ msgid "Please run aside with ibus\n"
-#~ msgstr "请在ibus中运行\n"
+msgstr "点击输入"

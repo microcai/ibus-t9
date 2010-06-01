@@ -27,6 +27,7 @@ struct _IBusT9Engine
   IBusEngine parent;
 
   /* members */
+  gint		panel_show_old;
 
   IBusLookupTable *table;
   GString * inputed;
@@ -67,4 +68,6 @@ int phraser_get_phrases(GArray * result, GString * input, PHRASER * phraser);
 
 extern const gchar * datafile; //= "data/handwriting-zh_CN.model";
 extern const char * icondir;
+extern IBusBus *bus;
+
 #endif
