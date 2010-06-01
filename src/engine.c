@@ -175,7 +175,35 @@ ibus_t9_engine_update(IBusT9Engine *engine)
 
 	ibus_engine_update_lookup_table(IBUS_ENGINE(engine),engine->table,1);
 
-	ibus_engine_update_auxiliary_text(IBUS_ENGINE(engine),ibus_text_new_from_static_string(engine->inputed->str),1);
+	gunichar aux_text[80]={0,0};
+
+	for(i=0;i<engine->inputed->len;i++)
+	{
+		switch(engine->inputed->str[i])
+		{
+		case 'h':
+		aux_text[i] = 0x31D0;
+		break;
+
+		case 's':
+		aux_text[i] = 0x31D1;
+		break;
+
+		case 'p':
+		aux_text[i] = 0x31D3;
+		break;
+
+		case 'n':
+		aux_text[i] = 0x31D4;
+		break;
+
+		case 'z':
+		aux_text[i] = 0x31D5;
+		break;
+		}
+	}
+
+	ibus_engine_update_auxiliary_text(IBUS_ENGINE(engine),ibus_text_new_from_ucs4(aux_text),1);
 
 	ibus_engine_update_preedit_text(IBUS_ENGINE(engine),ibus_text_new_from_static_string(g_array_index(engine->matched,MATCHED,0).hanzi),0,1);
 
