@@ -18,7 +18,6 @@
 #endif
 
 #include "engine.h"
-#include "lookuptable.h"
 #include "../icons/ibus_t9.icons.h"
 
 /* functions prototype */
@@ -31,6 +30,13 @@ ibus_t9_engine_destroy(IBusT9Engine *engine);
 static gboolean
 ibus_t9_engine_process_key_event(IBusEngine *engine, guint keyval,
     guint keycode, guint modifiers);
+
+static void
+ibus_t9_engine_enable(IBusEngine *engine);
+
+static void
+ibus_t9_engine_disable(IBusEngine *engine);
+
 static void
 ibus_t9_engine_focus_in(IBusEngine *engine);
 static void
@@ -90,9 +96,9 @@ ibus_t9_engine_class_init(IBusT9EngineClass *klass)
 
   engine_class->process_key_event = ibus_t9_engine_process_key_event;
 
-  engine_class->enable = ibus_t9_engine_focus_in;
+  engine_class->enable = ibus_t9_engine_enable;
 
-  engine_class->disable = ibus_t9_engine_focus_out;
+  engine_class->disable = ibus_t9_engine_disable;
 
   engine_class->focus_in = ibus_t9_engine_focus_in;
 
@@ -118,91 +124,58 @@ ibus_t9_engine_init(IBusT9Engine *engine)
 
   GError * err;
 
-  engine->laststate.x = 300;
-  engine->laststate.y = 300;
-  engine->laststate.width = 200;
-  engine->laststate.height = 100;
-  engine->drag = 0;
-
   klass = IBUS_T9_ENGINE_GET_CLASS(engine);
-
-  engine->LookupTable = gtk_window_new(GTK_WINDOW_POPUP);
-
-  engine->box = gtk_vbox_new(FALSE,0);
-
-  gtk_container_add(GTK_CONTAINER(engine->LookupTable),engine->box);
-
-  GtkWidget * hb = gtk_hbox_new(TRUE,0);
-
-  gtk_box_pack_end_defaults(GTK_BOX(engine->box),hb);
-
-  const guint8 * ibus_t9_icon_key[] =
-  {	  ibus_t9_icon_key1, ibus_t9_icon_key2, ibus_t9_icon_key3, ibus_t9_icon_key4, ibus_t9_icon_key5 };
-
-  for (i = 0; i < 5; ++i)
-    {
-      err = NULL;
-      gchar *  icon_file ;
-
-      struct button_data * callback_data = & engine->stok_botton_call_back[i];
-      callback_data->engine = engine;
-      callback_data->index = i;
-
-      engine->keysicon[i] = gdk_pixbuf_new_from_inline(-1,ibus_t9_icon_key[i],FALSE,NULL);
-
-      px = gdk_pixbuf_scale_simple(engine->keysicon[i],32,32,GDK_INTERP_HYPER);
-      GtkWidget * gtkimg = gtk_image_new_from_pixbuf(px);
-      g_object_unref(px);
-
-      GtkWidget* bt = gtk_button_new();
-      gtk_button_set_image(GTK_BUTTON(bt),gtkimg);
-	  gtk_box_pack_start_defaults(GTK_BOX(hb),bt);
-	  g_signal_connect(G_OBJECT(bt),"clicked",G_CALLBACK(button_clicked),callback_data);
-    }
-
-  GtkWidget * head = gtk_image_new();
-
-  gtk_widget_set_size_request(head,200,30);
-
-  gtk_box_pack_start(GTK_BOX(engine->box),head,TRUE,TRUE,FALSE);
-
-  g_signal_connect(G_OBJECT(head),"expose-event",G_CALLBACK(on_paint),engine);
-
-  engine->tables = gtk_table_new(2, 5, TRUE);
-
-  gtk_widget_set_size_request(engine->tables,200,80);
-
-  gtk_box_pack_start(GTK_BOX(engine->box),engine->tables,TRUE,TRUE,TRUE);
-
-  gtk_window_move(GTK_WINDOW(engine->LookupTable), engine->laststate.x,
-      engine->laststate.y);
-
-//gtk_window_resize(GTK_WINDOW(engine->LookupTable),200,200);
-
-  gtk_widget_add_events(GTK_WIDGET(engine->LookupTable), GDK_BUTTON_MOTION_MASK
-      | GDK_BUTTON_RELEASE_MASK | GDK_BUTTON_PRESS_MASK | GDK_EXPOSURE_MASK);
-  g_signal_connect_after(G_OBJECT(engine->LookupTable),"motion_notify_event",G_CALLBACK(on_mouse_move),engine);
-  g_signal_connect(G_OBJECT(engine->LookupTable),"button-release-event",G_CALLBACK(on_button),engine);
-  g_signal_connect(G_OBJECT(engine->LookupTable),"button-press-event",G_CALLBACK(on_button),engine);
-  g_signal_connect(G_OBJECT(engine->LookupTable),"realize",G_CALLBACK(widget_realize),engine);
 
   engine->matched = g_array_sized_new(FALSE, TRUE, sizeof(MATCHED), 20);
   engine->inputed = g_string_new("");
-  gtk_widget_show_all(engine->LookupTable);
+
+  return;
 }
 
 static void
 ibus_t9_engine_destroy(IBusT9Engine *engine)
 {
   g_print("%s\n", __func__);//, engine->laststate.x, engine->laststate.y);
-  if (engine->LookupTable)
-    {
-      gtk_widget_destroy(engine->LookupTable);
-      engine->LookupTable = NULL;
-      g_array_free(engine->matched, TRUE);
-      g_string_free(engine->inputed, TRUE);
-    }
   IBUS_OBJECT_CLASS(g_type_class_peek_parent(IBUS_ENGINE_GET_CLASS(engine)))->destroy(IBUS_OBJECT(engine));
+}
+
+static gboolean
+ibus_t9_engine_update(IBusT9Engine *engine)
+{
+	int i;
+
+
+	if (engine->inputed->len)
+	{
+		g_print("input is now %s\n", engine->inputed->str);
+		phraser_get_phrases(engine->matched, engine->inputed,
+				IBUS_T9_ENGINE_GET_CLASS(engine)->phraser);
+	}
+	else
+	{
+		engine->matched = g_array_set_size(engine->matched, 0);
+		ibus_engine_hide_preedit_text(IBUS_ENGINE(engine));
+		ibus_engine_hide_auxiliary_text(IBUS_ENGINE(engine));
+		ibus_engine_hide_lookup_table(IBUS_ENGINE(engine));
+		return FALSE;
+	}
+
+	engine->table = ibus_lookup_table_new(10,0,0,1);
+
+//	ibus_engine_update_preedit_text(IBUS_ENGINE(engine),ibus_text_new_from_static_string(engine->inputed->str),0,1);
+
+	for (i = 0; i < MIN(engine->matched->len,10); ++i)
+	{
+		gchar * hanzi = g_array_index(engine->matched,MATCHED,i).hanzi;
+
+		ibus_lookup_table_append_candidate(engine->table,ibus_text_new_from_static_string(hanzi));
+	}
+
+	ibus_engine_update_lookup_table(IBUS_ENGINE(engine),engine->table,1);
+
+	ibus_engine_update_auxiliary_text(IBUS_ENGINE(engine),ibus_text_new_from_static_string(engine->inputed->str),1);
+
+	return TRUE;
 }
 
 static int ibus_t9_engine_commit_string(IBusT9Engine *engine, guint index)
@@ -213,57 +186,10 @@ static int ibus_t9_engine_commit_string(IBusT9Engine *engine, guint index)
 				ibus_text_new_from_static_string(
 						g_array_index(engine->matched,MATCHED,index).hanzi));
 		g_string_truncate(engine->inputed, 0);
+		ibus_t9_engine_update(engine);
 		return TRUE;
 	}
 	return FALSE;
-}
-
-static gboolean
-ibus_t9_engine_update(IBusT9Engine *engine)
-{
-//	gtk_container_remove(GTK_CONTAINER(engine->box),engine->tables);
-
-	gtk_widget_destroy(engine->tables);
-
-	engine->tables = gtk_table_new(2, 5, TRUE);
-
-	gtk_widget_set_size_request(engine->tables, 200, 80);
-
-	gtk_box_pack_start(GTK_BOX(engine->box), engine->tables, TRUE, TRUE, TRUE);
-
-  if (engine->inputed->len)
-    {
-      g_print("input is now %s\n", engine->inputed->str);
-      phraser_get_phrases(engine->matched, engine->inputed,
-          IBUS_T9_ENGINE_GET_CLASS(engine)->phraser);
-    }
-  else
-	  engine->matched = g_array_set_size(engine->matched,0);
-  int i;
-
-  for( i =0; i < MIN(engine->matched->len,10) ; ++i )
-  {
-	  struct button_data * callback_data = & engine->table_botton_call_back[i];
-
-	  callback_data->engine = engine;
-
-	  callback_data->index = i;
-
-	  g_print("create button with %s\n",g_array_index(engine->matched,MATCHED,i).hanzi);
-
-	  GtkWidget * child = gtk_button_new_with_label(g_array_index(engine->matched,MATCHED,i).hanzi);
-
-	  gtk_table_attach_defaults(GTK_TABLE(engine->tables), child, i % 5, i % 5 + 1,	i / 5, i / 5 + 1);
-
-	  g_signal_connect(G_OBJECT(child),"clicked",G_CALLBACK(table_button_clicked),callback_data);
-
-	  gtk_widget_show(child);
-  }
-
-  gtk_widget_show(engine->tables);
-
- //gdk_window_invalidate_rect(engine->LookupTable->window,0,0);
- return TRUE;
 }
 
 #define is_alpha(c) (((c) >= IBUS_a && (c) <= IBUS_z) || ((c) >= IBUS_A && (c) <= IBUS_Z))
@@ -314,18 +240,23 @@ ibus_t9_engine_process_key_event(IBusEngine *ibusengine, guint keyval,
       }
     return FALSE;
   case IBUS_KP_1:
+  case IBUS_h:
     engine->inputed = g_string_append_c(engine->inputed, 'h');
     return ibus_t9_engine_update(engine);
   case IBUS_KP_2:
+  case IBUS_s:
     engine->inputed = g_string_append_c(engine->inputed, 's');
     return ibus_t9_engine_update(engine);
   case IBUS_KP_3:
+  case IBUS_p:
     engine->inputed = g_string_append_c(engine->inputed, 'p');
     return ibus_t9_engine_update(engine);
   case IBUS_KP_4:
+  case IBUS_n:
     engine->inputed = g_string_append_c(engine->inputed, 'n');
     return ibus_t9_engine_update(engine);
   case IBUS_KP_5:
+  case IBUS_z:
     engine->inputed = g_string_append_c(engine->inputed, 'z');
     return ibus_t9_engine_update(engine);
   case IBUS_0 ... IBUS_9:
@@ -333,6 +264,20 @@ ibus_t9_engine_process_key_event(IBusEngine *ibusengine, guint keyval,
     }
 
   return FALSE;
+}
+static void
+ibus_t9_engine_enable(IBusEngine *engine)
+{
+//	((IBusT9Engine*)engine)->table = ibus_lookup_table_new(10,0,0,1);
+//	ibus_engine_update_lookup_table(engine,((IBusT9Engine*)engine)->table,1);
+	ibus_t9_engine_update((IBusT9Engine*)engine);
+}
+
+static void
+ibus_t9_engine_disable(IBusEngine *engine)
+{
+//	((IBusT9Engine*)engine)->table = NULL;
+	ibus_engine_hide_lookup_table(engine);
 }
 
 static void
@@ -342,7 +287,7 @@ ibus_t9_engine_focus_in(IBusEngine *engine)
 	IBusProperty * p;
 
 	IBusT9Engine * ibus_t9 = IBUS_T9_ENGINE(engine);
-	gtk_widget_show_all(ibus_t9->LookupTable);
+//	gtk_widget_show_all(ibus_t9->LookupTable);
 
 	IBusPropList * pl = ibus_prop_list_new();
 
@@ -371,9 +316,9 @@ static void
 ibus_t9_engine_focus_out(IBusEngine *engine)
 {
   IBusT9Engine * ibus_t9 = IBUS_T9_ENGINE(engine);
-  gtk_window_get_position(GTK_WINDOW(ibus_t9->LookupTable),
-      &ibus_t9->laststate.x, &ibus_t9->laststate.y);
-  gtk_widget_hide(ibus_t9->LookupTable);
+//  gtk_window_get_position(GTK_WINDOW(ibus_t9->LookupTable),
+//      &ibus_t9->laststate.x, &ibus_t9->laststate.y);
+//  gtk_widget_hide(ibus_t9->LookupTable);
 }
 
 static void

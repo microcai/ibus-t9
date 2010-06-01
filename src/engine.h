@@ -28,22 +28,10 @@ struct _IBusT9Engine
 
   /* members */
 
-  //  IBusLookupTable *table;
-  GtkWidget* LookupTable;
-  GtkWidget* tables;
-  GtkWidget* box;
-  GdkRectangle laststate;
-  GdkPoint lastpoint;
-  guint drag;
-  GdkPixbuf *keysicon[5];
-  gboolean iconstate[5];
-
+  IBusLookupTable *table;
   GString * inputed;
   GArray * matched;
   guint    page;
-
-  struct button_data	stok_botton_call_back[5];
-  struct button_data	table_botton_call_back[10];
 };
 
 struct _IBusT9EngineClass

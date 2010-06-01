@@ -115,11 +115,11 @@ int main(int argc, char* argv[])
 
 	GOptionEntry paramters[] =
 	{
-			{"ibus",'\0',0,G_OPTION_ARG_NONE,&have_ibus},
-			{"icon",'\0',0,G_OPTION_ARG_STRING,&icondir,_("the icon file"),N_("icon file")},
-			{"table",'\0',0,G_OPTION_ARG_STRING,&datafile,_("set table file path"),N_("tablefile")},
-			{"locale",'\0',0,G_OPTION_ARG_STRING,&locale_dir,_("set locale path"),N_("locale")},
-			{0}
+		{"ibus",'\0',0,G_OPTION_ARG_NONE,&have_ibus},
+		{"icon",'\0',0,G_OPTION_ARG_STRING,&icondir,_("the icon file"),N_("icon file")},
+		{"table",'\0',0,G_OPTION_ARG_STRING,&datafile,_("set table file path"),N_("tablefile")},
+		{"locale",'\0',0,G_OPTION_ARG_STRING,&locale_dir,_("set locale path"),N_("locale")},
+		{0}
 	};
 
 	g_assert(gtk_init_with_args(&argc, &argv, GETTEXT_PACKAGE,paramters, GETTEXT_PACKAGE, NULL));

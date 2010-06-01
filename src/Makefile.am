@@ -32,7 +32,7 @@ LIBS = @ALL_LIBS@
 
 libexec_PROGRAMS = ibus-engine-t9
 
-ibus_engine_t9_SOURCES =  main.c 	engine.c 	engine.h lookuptable.c lookuptable.h decoder.c
+ibus_engine_t9_SOURCES =  main.c 	engine.c 	engine.h decoder.c
 
 component_DATA = ibus-t9.xml 
 
