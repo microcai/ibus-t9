@@ -26,11 +26,6 @@
 static IBusBus *bus = NULL;
 static IBusFactory *factory = NULL;
 
-static void ibus_disconnected_cb(IBusBus *bus, gpointer user_data)
-{
-	gtk_main_quit();
-}
-
 const gchar * datafile = PKGDATADIR"/tables/table.txt";
 static int have_ibus;
 const char * icondir = PKGDATADIR"/icons/";
@@ -42,7 +37,7 @@ static void init_inside(const char *exefile)
 	ibus_init();
 
 	bus = ibus_bus_new();
-	g_signal_connect (bus, "disconnected", G_CALLBACK (ibus_disconnected_cb), NULL);
+	g_signal_connect (bus, "disconnected", G_CALLBACK (gtk_main_quit), NULL);
 
 	factory = ibus_factory_new(ibus_bus_get_connection(bus));
 
@@ -71,7 +66,7 @@ static void init_outside(const char * icon_dir, const char *exefile)
 	ibus_init();
 
 	bus = ibus_bus_new();
-	g_signal_connect (bus, "disconnected", G_CALLBACK (ibus_disconnected_cb), NULL);
+	g_signal_connect (bus, "disconnected", G_CALLBACK (gtk_main_quit), NULL);
 
 	factory = ibus_factory_new(ibus_bus_get_connection(bus));
 
