@@ -147,7 +147,6 @@ ibus_t9_engine_update(IBusT9Engine *engine)
 {
 	int i;
 
-
 	if (engine->inputed->len)
 	{
 		g_print("input is now %s\n", engine->inputed->str);
@@ -177,6 +176,8 @@ ibus_t9_engine_update(IBusT9Engine *engine)
 	ibus_engine_update_lookup_table(IBUS_ENGINE(engine),engine->table,1);
 
 	ibus_engine_update_auxiliary_text(IBUS_ENGINE(engine),ibus_text_new_from_static_string(engine->inputed->str),1);
+
+	ibus_engine_update_preedit_text(IBUS_ENGINE(engine),ibus_text_new_from_static_string(g_array_index(engine->matched,MATCHED,0).hanzi),0,1);
 
 	return TRUE;
 }
@@ -351,5 +352,6 @@ ibus_t9_property_activate(IBusEngine *engine, const gchar *prop_name,
 static void
 ibus_t9_candidate_clicked(IBusEngine *engine, guint index, guint button,guint state)
 {
+	ibus_engine_hide_preedit_text(IBUS_ENGINE(engine));
 	ibus_engine_commit_text(engine,ibus_text_new_from_static_string(g_array_index(IBUS_T9_ENGINE(engine)->matched,MATCHED,index).hanzi));
 }
