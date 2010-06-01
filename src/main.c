@@ -61,9 +61,9 @@ static void init_inside(const char *exefile)
 
 static void init_outside(const char * icon_dir, const char *exefile)
 {
-	char iconfile [1024];
-	strcpy(iconfile,icon_dir);
-	strcat(iconfile,"/ibus-t9.svg");
+	char * iconfile;
+
+	iconfile = g_strdup_printf("%s/ibus-t9.svg",icon_dir);
 
 	IBusComponent *component;
 	IBusEngineDesc * desc;
@@ -94,10 +94,19 @@ static void init_outside(const char * icon_dir, const char *exefile)
 	ibus_factory_add_engine(factory, "T9", IBUS_TYPE_T9_ENGINE);
 
 	g_object_unref(component);
+
+	g_free(iconfile);
+
+	iconfile = g_malloc(1024);
+
+	realpath(icondir,iconfile);
+
+	icondir = iconfile;
 }
 
 int main(int argc, char* argv[])
 {
+	int i;
 	const gchar * locale_dir = NULL;
 
 	setlocale(LC_ALL, "");

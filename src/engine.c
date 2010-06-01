@@ -51,8 +51,8 @@ ibus_t9_engine_cursor_up(IBusEngine *engine);
 static void
 ibus_t9_engine_cursor_down(IBusEngine *engine);
 static void
-ibus_enchant_property_activate(IBusEngine *engine, const gchar *prop_name,
-    gint prop_state);
+ibus_t9_property_activate(IBusEngine *engine, const gchar *prop_name,
+    guint prop_state);
 static void
 ibus_t9_engine_property_show(IBusEngine *engine, const gchar *prop_name);
 static void
@@ -97,6 +97,8 @@ ibus_t9_engine_class_init(IBusT9EngineClass *klass)
   engine_class->focus_in = ibus_t9_engine_focus_in;
 
   engine_class->focus_out = ibus_t9_engine_focus_out;
+
+  engine_class->property_activate = ibus_t9_property_activate;
 
   klass->icondir = g_string_new(icondir);
 
@@ -336,8 +338,33 @@ ibus_t9_engine_process_key_event(IBusEngine *ibusengine, guint keyval,
 static void
 ibus_t9_engine_focus_in(IBusEngine *engine)
 {
-  IBusT9Engine * ibus_t9 = IBUS_T9_ENGINE(engine);
-  gtk_widget_show_all(ibus_t9->LookupTable);
+	int i;
+	IBusProperty * p;
+
+	IBusT9Engine * ibus_t9 = IBUS_T9_ENGINE(engine);
+	gtk_widget_show_all(ibus_t9->LookupTable);
+
+	IBusPropList * pl = ibus_prop_list_new();
+
+	for(i=1;i<=5;i++)
+	{
+		gchar * icon_name = g_strdup_printf("%s/key%d.svg",icondir,i);
+
+		gchar * prog_id = g_strdup_printf("%d",i);
+
+
+		p= ibus_property_new(prog_id, PROP_TYPE_NORMAL,
+				ibus_text_new_from_static_string(_("key")),
+				icon_name, ibus_text_new_from_static_string(
+						_("click to input")), TRUE, TRUE,
+				PROP_STATE_UNCHECKED, NULL);
+
+		ibus_prop_list_append(pl, p);
+		g_free(prog_id);
+		g_free(icon_name);
+	}
+
+	ibus_engine_register_properties(IBUS_ENGINE(engine), pl);
 }
 
 static void
@@ -347,4 +374,28 @@ ibus_t9_engine_focus_out(IBusEngine *engine)
   gtk_window_get_position(GTK_WINDOW(ibus_t9->LookupTable),
       &ibus_t9->laststate.x, &ibus_t9->laststate.y);
   gtk_widget_hide(ibus_t9->LookupTable);
+}
+
+static void
+ibus_t9_property_activate(IBusEngine *engine, const gchar *prop_name,
+    guint prop_state)
+{
+	ibus_t9_engine_process_key_event;
+
+	char inputs_key_map [] = { 'h', 's', 'p','n','z'};
+
+	char  input;
+
+	switch(*prop_name)
+	{
+	case '1' ... '5':
+		input= inputs_key_map[*prop_name-'1'];
+
+	    IBUS_T9_ENGINE(engine)->inputed = g_string_append_c(IBUS_T9_ENGINE(engine)->inputed, input);
+
+	    ibus_t9_engine_update(IBUS_T9_ENGINE(engine));
+
+		g_print("press %c\n",input);
+		break;
+	}
 }
