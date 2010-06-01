@@ -34,8 +34,6 @@ static void init_inside(const char *exefile)
 {
 	IBusComponent *component;
 
-	ibus_init();
-
 	bus = ibus_bus_new();
 	g_signal_connect (bus, "disconnected", G_CALLBACK (gtk_main_quit), NULL);
 
@@ -63,7 +61,6 @@ static void init_outside(const char * icon_dir, const char *exefile)
 	IBusComponent *component;
 	IBusEngineDesc * desc;
 
-	ibus_init();
 
 	bus = ibus_bus_new();
 	g_signal_connect (bus, "disconnected", G_CALLBACK (gtk_main_quit), NULL);
@@ -116,6 +113,8 @@ int main(int argc, char* argv[])
 		{"locale",'\0',0,G_OPTION_ARG_STRING,&locale_dir,_("set locale path"),N_("locale")},
 		{0}
 	};
+
+	ibus_init();
 
 	g_assert(gtk_init_with_args(&argc, &argv, GETTEXT_PACKAGE,paramters, GETTEXT_PACKAGE, NULL));
 
