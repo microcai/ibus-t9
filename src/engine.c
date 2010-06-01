@@ -57,8 +57,9 @@ ibus_t9_engine_cursor_up(IBusEngine *engine);
 static void
 ibus_t9_engine_cursor_down(IBusEngine *engine);
 static void
-ibus_t9_property_activate(IBusEngine *engine, const gchar *prop_name,
-    guint prop_state);
+ibus_t9_property_activate(IBusEngine *engine, const gchar *prop_name,guint prop_state);
+static void
+ibus_t9_candidate_clicked(IBusEngine *engine, guint index, guint button,guint state);
 static void
 ibus_t9_engine_property_show(IBusEngine *engine, const gchar *prop_name);
 static void
@@ -98,13 +99,15 @@ ibus_t9_engine_class_init(IBusT9EngineClass *klass)
 
   engine_class->enable = ibus_t9_engine_enable;
 
-  engine_class->disable = ibus_t9_engine_disable;
-
+//  engine_class->disable = ibus_t9_engine_disable;
+//
   engine_class->focus_in = ibus_t9_engine_focus_in;
-
-  engine_class->focus_out = ibus_t9_engine_focus_out;
+//
+//  engine_class->focus_out = ibus_t9_engine_focus_out;
 
   engine_class->property_activate = ibus_t9_property_activate;
+
+  engine_class->candidate_clicked = ibus_t9_candidate_clicked;
 
   klass->icondir = g_string_new(icondir);
 
@@ -343,4 +346,10 @@ ibus_t9_property_activate(IBusEngine *engine, const gchar *prop_name,
 		g_print("press %c\n",input);
 		break;
 	}
+}
+
+static void
+ibus_t9_candidate_clicked(IBusEngine *engine, guint index, guint button,guint state)
+{
+	ibus_engine_commit_text(engine,ibus_text_new_from_static_string(g_array_index(IBUS_T9_ENGINE(engine)->matched,MATCHED,index).hanzi));
 }
