@@ -19,6 +19,11 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
+BUILT_SOURCES = icons/ibus_t9.icons.h
+
+icons/ibus_t9.icons.h:
+	cd ../icons && $(MAKE) 
+
 libexecdir = ${prefix}/share/ibus/engine
 
 INCLUDES =  @ALL_CFLAGS@ -DPKGDATADIR=\"$(pkgdatadir)\" -DPREFIX=\"$(prefix)\"
