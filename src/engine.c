@@ -72,21 +72,20 @@ static guint instance_number = 0;
 GType
 ibus_t9_engine_get_type(void)
 {
-  static GType type = 0;
+	static GType type = 0;
 
-  static const GTypeInfo type_info =
-    { sizeof(IBusT9EngineClass), (GBaseInitFunc) NULL,
-        (GBaseFinalizeFunc) NULL, (GClassInitFunc) ibus_t9_engine_class_init,
-        NULL, NULL, sizeof(IBusT9Engine), 0,
-        (GInstanceInitFunc) ibus_t9_engine_init, };
+	static const GTypeInfo type_info =
+	{ sizeof(IBusT9EngineClass), (GBaseInitFunc) NULL,
+			(GBaseFinalizeFunc) NULL,
+			(GClassInitFunc) ibus_t9_engine_class_init, NULL, NULL,
+			sizeof(IBusT9Engine), 0, (GInstanceInitFunc) ibus_t9_engine_init, };
 
-  if (type == 0)
-    {
-      type = g_type_register_static(IBUS_TYPE_ENGINE, "IBusT9Engine",
-          &type_info, (GTypeFlags) 0);
-    }
-
-  return type;
+	if (g_once_init_enter(&type))
+	{
+		g_once_init_leave(&type, g_type_register_static(IBUS_TYPE_ENGINE,
+				"IBusT9Engine", &type_info, (GTypeFlags) 0));
+	}
+	return type;
 }
 
 static void

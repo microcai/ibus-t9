@@ -26,9 +26,9 @@ icons/ibus_t9.icons.h:
 
 libexecdir = ${prefix}/share/ibus/engine
 
-INCLUDES =  @ALL_CFLAGS@ -DPKGDATADIR=\"$(pkgdatadir)\" -DPREFIX=\"$(prefix)\"
+INCLUDES =  @IBUS_CFLAGS@ -DPKGDATADIR=\"$(pkgdatadir)\" -DPREFIX=\"$(prefix)\"
 
-LIBS = @ALL_LIBS@
+LIBS = @IBUS_LIBS@
 
 libexec_PROGRAMS = ibus-engine-t9
 

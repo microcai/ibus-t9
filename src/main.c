@@ -35,7 +35,7 @@ static void init_inside(const char *exefile)
 	IBusComponent *component;
 
 	bus = ibus_bus_new();
-	g_signal_connect (bus, "disconnected", G_CALLBACK (gtk_main_quit), NULL);
+	g_signal_connect (bus, "disconnected", G_CALLBACK (ibus_quit), NULL);
 
 	factory = ibus_factory_new(ibus_bus_get_connection(bus));
 
@@ -63,7 +63,7 @@ static void init_outside(const char * icon_dir, const char *exefile)
 
 
 	bus = ibus_bus_new();
-	g_signal_connect (bus, "disconnected", G_CALLBACK (gtk_main_quit), NULL);
+	g_signal_connect (bus, "disconnected", G_CALLBACK (ibus_quit), NULL);
 
 	factory = ibus_factory_new(ibus_bus_get_connection(bus));
 
@@ -102,7 +102,6 @@ int main(int argc, char* argv[])
 	const gchar * locale_dir = NULL;
 
 	setlocale(LC_ALL, "");
-	gtk_set_locale();
 	textdomain(GETTEXT_PACKAGE);
 
 	GOptionEntry paramters[] =
@@ -116,14 +115,18 @@ int main(int argc, char* argv[])
 
 	ibus_init();
 
-	g_assert(gtk_init_with_args(&argc, &argv, GETTEXT_PACKAGE,paramters, GETTEXT_PACKAGE, NULL));
+	GOptionContext * context = g_option_context_new("");
+
+	g_option_context_add_main_entries(context,paramters,GETTEXT_PACKAGE);
+
+	g_assert(g_option_context_parse(context,&argc,&argv,NULL));
+
+	g_option_context_free(context);
 
 	if(locale_dir)
 	{
 		bindtextdomain(GETTEXT_PACKAGE, locale_dir);
 	}
-
-	ibus_init();
 
 	char exefile[4096] =
 	{ 0 };
@@ -139,6 +142,6 @@ int main(int argc, char* argv[])
 	{
 		init_inside(realpath(argv[0], exefile));
 	}
-	gtk_main();
+	ibus_main();
 	return 0;
 }
