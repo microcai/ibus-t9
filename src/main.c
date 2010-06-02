@@ -30,7 +30,7 @@ const char * icondir = PKGDATADIR"/icons/";
 
 int main(int argc, char* argv[])
 {
-	int have_ibus,i;
+	gboolean have_ibus=FALSE;
 	const gchar * locale_dir = NULL;
 	IBusComponent *component;
 	IBusFactory *factory = NULL;

@@ -3,7 +3,6 @@
 #define __ENGINE_H__
 
 #include <ibus.h>
-#include <gtk/gtk.h>
 
 typedef struct _PHRASER PHRASER;
 typedef struct _IBusT9Engine IBusT9Engine;

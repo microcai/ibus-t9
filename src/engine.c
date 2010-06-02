@@ -124,7 +124,6 @@ ibus_t9_engine_init(IBusT9Engine *engine)
 {
 	size_t i;
 	IBusT9EngineClass* klass;
-	GdkPixbuf * px;
 
 	GError * err;
 
