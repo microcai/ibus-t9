@@ -24,82 +24,16 @@
 #include "engine.h"
 
 IBusBus *bus = NULL;
-static IBusFactory *factory = NULL;
 
 const gchar * datafile = PKGDATADIR"/tables/table.txt";
-static int have_ibus;
 const char * icondir = PKGDATADIR"/icons/";
-
-static void init_inside(const char *exefile)
-{
-	IBusComponent *component;
-
-	bus = ibus_bus_new();
-	g_signal_connect (bus, "disconnected", G_CALLBACK (ibus_quit), NULL);
-
-	factory = ibus_factory_new(ibus_bus_get_connection(bus));
-
-	ibus_bus_request_name(bus, "org.freedesktop.IBus.T9", 0);
-
-        component = ibus_component_new("org.freedesktop.IBus.T9",
-                        _("T9 input method"), PACKAGE_VERSION, "GPL", MICROCAI_WITHEMAIL, PACKAGE_BUGREPORT,
-                        exefile, GETTEXT_PACKAGE);
-
-	ibus_bus_register_component(bus, component);
-
-	ibus_factory_add_engine(factory, "T9", IBUS_TYPE_T9_ENGINE);
-
-	g_object_unref(component);
-}
-
-static void init_outside(const char * icon_dir, const char *exefile)
-{
-	char * iconfile;
-
-	iconfile = g_strdup_printf("%s/ibus-t9.svg",icon_dir);
-
-	IBusComponent *component;
-	IBusEngineDesc * desc;
-
-
-	bus = ibus_bus_new();
-	g_signal_connect (bus, "disconnected", G_CALLBACK (ibus_quit), NULL);
-
-	factory = ibus_factory_new(ibus_bus_get_connection(bus));
-
-	ibus_bus_request_name(bus, "org.freedesktop.IBus.T9", 0);
-
-
-
-	desc = ibus_engine_desc_new("T9", "ibus-T9",
-			_("T9 input method"), "zh_CN", "GPL",
-			MICROCAI_WITHEMAIL, iconfile, "us");
-
-	component = ibus_component_new("org.freedesktop.IBus.T9",
-			_("T9 input method"), PACKAGE_VERSION, "GPL", MICROCAI_WITHEMAIL, PACKAGE_BUGREPORT,
-			exefile, GETTEXT_PACKAGE);
-
-	ibus_component_add_engine(component, desc);
-
-	ibus_bus_register_component(bus, component);
-
-	ibus_factory_add_engine(factory, "T9", IBUS_TYPE_T9_ENGINE);
-
-	g_object_unref(component);
-
-	g_free(iconfile);
-
-	iconfile = g_malloc(1024);
-
-	realpath(icondir,iconfile);
-
-	icondir = iconfile;
-}
 
 int main(int argc, char* argv[])
 {
-	int i;
+	int have_ibus,i;
 	const gchar * locale_dir = NULL;
+	IBusComponent *component;
+	IBusFactory *factory = NULL;
 
 	setlocale(LC_ALL, "");
 	textdomain(GETTEXT_PACKAGE);
@@ -128,20 +62,41 @@ int main(int argc, char* argv[])
 		bindtextdomain(GETTEXT_PACKAGE, locale_dir);
 	}
 
-	char exefile[4096] =
-	{ 0 };
+	bus = ibus_bus_new();
+
+	g_signal_connect (bus, "disconnected", G_CALLBACK (ibus_quit), NULL);
+
+	factory = ibus_factory_new(ibus_bus_get_connection(bus));
+
+	ibus_bus_request_name(bus, "org.freedesktop.IBus.T9", 0);
+
+	component = ibus_component_new("org.freedesktop.IBus.T9",
+                        _("T9 input method"), PACKAGE_VERSION, "GPL", MICROCAI_WITHEMAIL, PACKAGE_BUGREPORT,
+                        argv[0], GETTEXT_PACKAGE);
 
 	if (!have_ibus)
 	{
-		char iconfile[4096] =
-		{ 0 };
-		init_outside(realpath(icondir, iconfile), realpath(argv[0], exefile));
-		printf(_("ibus-t9 Version %s Start Up\n"), PACKAGE_VERSION);
+		icondir = realpath(icondir,0);
+
+		char * iconfile = g_strdup_printf("%s/ibus-t9.svg",icondir);
+
+		IBusEngineDesc * desc = ibus_engine_desc_new("T9", "ibus-T9",
+				_("T9 input method"), "zh_CN", "GPL",
+				MICROCAI_WITHEMAIL, iconfile, "us");
+
+		g_free(iconfile);
+
+		ibus_component_add_engine(component, desc);
 	}
-	else
-	{
-		init_inside(realpath(argv[0], exefile));
-	}
+
+	ibus_bus_register_component(bus, component);
+
+	ibus_factory_add_engine(factory, "T9", IBUS_TYPE_T9_ENGINE);
+
+	g_object_unref(component);
+
+	printf(_("ibus-t9 Version %s Start Up\n"), PACKAGE_VERSION);
+
 	ibus_main();
 	return 0;
 }
