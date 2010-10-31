@@ -1,3 +1,9 @@
+ibus-t9 (2.1.0-1ubuntu3) lucid; urgency=low
+
+  *  2.1.0 Release. 
+
+ -- fracting <fracting@fracting-desktop>  Fri, 04 Jun 2010 00:06:07 +0800
+
 ibus-t9 (2.0.0-2ubuntu2) lucid; urgency=low
 
   *  Bug fixed.
