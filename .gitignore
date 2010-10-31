@@ -27,3 +27,8 @@ build-stamp
 debian/files
 debian/ibus-t9/
 debian/ibus-t9*
+*.spec
+ibus-engine-t9
+ibus-t9.xml
+stamp*
+icons/ibus_t9.icons.h
