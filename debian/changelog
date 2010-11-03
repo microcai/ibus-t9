@@ -1,20 +1,26 @@
+ibus-t9 (2.1.0-1ubuntu4) maverick; urgency=low
+
+  * Fix dependence issue in Ubuntu 10.10
+
+ -- fracting <fracting@gmail.com>  Wed, 03 Nov 2010 12:28:26 +0800
+
 ibus-t9 (2.1.0-1ubuntu3) lucid; urgency=low
 
   *  2.1.0 Release. 
 
- -- fracting <fracting@fracting-desktop>  Fri, 04 Jun 2010 00:06:07 +0800
+ -- fracting <fracting@gmail.com>  Fri, 04 Jun 2010 00:06:07 +0800
 
 ibus-t9 (2.0.0-2ubuntu2) lucid; urgency=low
 
   *  Bug fixed.
 
- -- fracting <fracting@fracting-desktop>  Tue, 01 Jun 2010 12:56:33 +0800
+ -- fracting <fracting@gmail.com>  Tue, 01 Jun 2010 12:56:33 +0800
 
 ibus-t9 (2.0.0-1ubuntu1) lucid; urgency=low
 
   *  2.0.0 Release.
 
- -- fracting <fracting@fracting-desktop>  Tue, 01 Jun 2010 12:23:01 +0800
+ -- fracting <fracting@gmail.com>  Tue, 01 Jun 2010 12:23:01 +0800
 
 
 ibus-t9 (1.3.0-1) stable; urgency=low
